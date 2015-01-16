@@ -16,10 +16,9 @@ class TestAssertSeleniumCMISservice(unittest.TestCase):
 	
 	
     def test_SWSDP_CMIS_OpenConnection(self):
-	client = CmisClient(self.url + '/alfresco/s/cmis', self.username, self.password) 
+	client = CmisClient(self.url + self.cmisurl, self.username, self.password) 
  	repo = client.getDefaultRepository()
 	repoid = repo.getRepositoryId() 
-	print repoid
 	self.assertIn('be5e557d0dfb',repoid)
 	
     def tearDown(self):
