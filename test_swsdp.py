@@ -13,6 +13,7 @@ class TestAssertSeleniumLoggedIn(unittest.TestCase):
 	url = self.url + '/share'
 	self.browser.get(url)
         driver = self.browser
+        driver.implicitly_wait(10)
         elem = driver.find_element_by_name('username')
         elem.send_keys(self.username)
         elem = driver.find_element_by_name('password')
