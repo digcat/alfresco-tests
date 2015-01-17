@@ -19,11 +19,12 @@ class TestAssertSeleniumCMISservice(unittest.TestCase):
 	client = CmisClient(self.url + self.cmisurl, self.username, self.password) 
 	try:
  		repo = client.getDefaultRepository()
+		repoid = repo.getRepositoryId() 
 	except:
 		repo = [] 
-	if len(str(repo))>0:
-		repoid = repo.getRepositoryId() 
-		self.assertIn('a',repoid)
+		repoid = ''
+
+	self.assertIn('a',repoid)
 	
     def tearDown(self):
 	self = [] 
