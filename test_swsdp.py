@@ -20,13 +20,8 @@ class TestAssertSeleniumLoggedIn(unittest.TestCase):
         elem.submit()
 
     def test_SWSDP_EditProperties(self):
-	url = self.url + '/share/page/site/swsdp/dashboard'
-	self.browser.get(self.url)
-        driver = self.browser
-	self.browser.get(url)
 	picture = self.url + '/share/page/site/swsdp/edit-metadata?nodeRef=workspace://SpacesStore/0f672fb8-bbdb-41bb-84f3-7b9bb1c39b30'
        	self.browser.get(picture)
-	driver = self.browser
 	self.assertIn('Edit Properties',self.browser.title)
 
     def test_SWSDP_PeopleFinder(self):
@@ -65,6 +60,8 @@ class TestAssertSeleniumLoggedIn(unittest.TestCase):
 	self.assertIn('Project Links',self.browser.title)	
  
     def tearDown(self):
+	logout = self.url + '/share/page/dologout'
+	self.browser.get(logout)
         self.browser.quit()
 
 
