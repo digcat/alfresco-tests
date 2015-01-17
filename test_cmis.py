@@ -1,5 +1,6 @@
 import socket
 import unittest
+import cmislib
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from configure import Configuration
