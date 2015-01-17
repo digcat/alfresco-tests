@@ -1,10 +1,9 @@
+import socket
 import unittest
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from configure import Configuration
-import socket
 from cmislib.model import CmisClient, Repository
-
 
 class TestAssertSeleniumCMISservice(unittest.TestCase):
     def setUp(self):
