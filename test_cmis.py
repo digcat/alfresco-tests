@@ -24,7 +24,7 @@ class TestAssertSeleniumCMISservice(unittest.TestCase):
 		repo = [] 
 		repoid = ''
 
-	self.assertIn('a',repoid)
+	self.assertIn('Main Repository',repo.name)
 	
     def tearDown(self):
 	self = [] 
