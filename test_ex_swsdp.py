@@ -17,7 +17,7 @@ class testLoggedIn(unittest.TestCase):
 	self.browser.get(url)
 	finallycomplete = 0	
 	try:
-		element = WebDriverWait(self.browser, 60).until(
+		element = WebDriverWait(self.browser, 120).until(
 			EC.presence_of_element_located((By.ID, "page_x002e_components_x002e_slingshot-login_x0023_default-username"))
 		)
 	finally:
@@ -30,7 +30,7 @@ class testLoggedIn(unittest.TestCase):
         elem.send_keys(self.password)
         elem.submit()
 	try:	
-		element = WebDriverWait(driver, 240).until(
+		element = WebDriverWait(driver, 400).until(
 			EC.presence_of_element_located((By.ID, "HEADER_MY_FILES_text"))
 		)
 	finally:
