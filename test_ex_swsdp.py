@@ -31,7 +31,7 @@ class testLoggedIn(unittest.TestCase):
         elem.submit()
 	try:	
 		element = WebDriverWait(driver, 180).until(
-			EC.presence_of_element_located((By.ID, "HEADER_SITE_MEMBERS"))
+			EC.presence_of_element_located((By.ID, "global_x002e_footer"))
 		)
 	finally:
 		finallycomplete = 1
