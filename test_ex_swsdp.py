@@ -30,7 +30,7 @@ class testLoggedIn(unittest.TestCase):
         elem.send_keys(self.password)
         elem.submit()
 	try:	
-		element = WebDriverWait(driver, 180).until(
+		element = WebDriverWait(driver, 240).until(
 			EC.presence_of_element_located((By.ID, "global_x002e_footer"))
 		)
 	finally:
