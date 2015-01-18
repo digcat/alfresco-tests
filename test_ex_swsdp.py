@@ -30,8 +30,8 @@ class testLoggedIn(unittest.TestCase):
         elem.send_keys(self.password)
         elem.submit()
 	try:	
-		element = WebDriverWait(driver, 400).until(
-			EC.presence_of_element_located((By.ID, "HEADER_MY_FILES_text"))
+		element = WebDriverWait(driver, 180).until(
+			EC.presence_of_element_located((By.ID, "global_x002e_footer_x0023_default"))
 		)
 	finally:
 		finallycomplete = 1
