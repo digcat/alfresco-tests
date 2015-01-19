@@ -21,12 +21,10 @@ class TestAssertSeleniumLoggedIn(unittest.TestCase):
 
     def test_SWSDP_EditProperties(self):
 	url = self.url + '/share/page/site/swsdp/dashboard'
-	self.browser.get(self.url)
         driver = self.browser
-	self.browser.get(url)
+	driver.get(url)
 	picture = self.url + '/share/page/site/swsdp/edit-metadata?nodeRef=workspace://SpacesStore/0f672fb8-bbdb-41bb-84f3-7b9bb1c39b30'
-       	self.browser.get(picture)
-	driver = self.browser
+       	driver.get(picture)
 	self.assertIn('Edit Properties',self.browser.title)
 
     def test_SWSDP_PeopleFinder(self):
