@@ -23,6 +23,7 @@ class TestAssertSeleniumCMISservice(unittest.TestCase):
 	except:
 		repo = [] 
 		repoid = ''
+		repo.name = ''
 
 	self.assertIn('Main Repository',repo.name)
 	
