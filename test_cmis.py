@@ -20,12 +20,9 @@ class TestAssertSeleniumCMISservice(unittest.TestCase):
 	try:
  		repo = client.getDefaultRepository()
 		repoid = repo.getRepositoryId() 
+		self.assertIn('Main Repository',repo.name)
 	except:
-		repo = [] 
-		repoid = ''
-		repo.name = ''
-
-	self.assertIn('Main Repository',repo.name)
+		return 1
 	
     def tearDown(self):
 	self = [] 
