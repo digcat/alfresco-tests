@@ -2,7 +2,7 @@ user: admin
 passwd: admin
 url: http://docs.digcat.com:8080
 browser: firefox
-cmisurl: /alfresco/s/cmis
+cmisurl: /alfresco/cmisatom
 ftpurl: docs.digcat.com 
 ftpport: 2021
 ftpsrc: /Alfresco/Sites/swsdp/documentLibrary/Presentations

@@ -16,13 +16,17 @@ class TestAssertSeleniumCMISservice(unittest.TestCase):
 	
 	
     def test_SWSDP_CMIS_OpenConnection(self):
-	client = CmisClient(self.url + self.cmisurl, self.username, self.password) 
+	reponame = ''
 	try:
+		client = CmisClient(self.url + self.cmisurl, self.username, self.password) 
  		repo = client.getDefaultRepository()
 		repoid = repo.getRepositoryId() 
-		self.assertIn('Main Repository',repo.name)
+		print repoid
+		reponame = repo.name
 	except:
-		return 1
+		reponame = ''	
+		
+	self.assertIn('Main Repository',reponame)
 	
     def tearDown(self):
 	self = [] 
