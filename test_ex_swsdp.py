@@ -123,5 +123,5 @@ class testLoggedIn(unittest.TestCase):
         self.browser.quit()
 
 
-if __name__ == '__main__':
-    unittest.main(verbosity=3)
+#if __name__ == '__main__':
+#    unittest.main(verbosity=3)
