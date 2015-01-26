@@ -55,7 +55,7 @@ class testLoggedIn(unittest.TestCase):
 	finally:
 		finallycomplete = 1
 
-	self.assertIn(1,finallycomplete)
+	self.assertIn('1',str(finallycomplete))
 		
 
     def tearDown(self):
