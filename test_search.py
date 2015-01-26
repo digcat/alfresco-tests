@@ -49,11 +49,13 @@ class testLoggedIn(unittest.TestCase):
 	element.send_keys('meetings')
 
 	try:
-		element = WebDriverWait(self.browser,300).until(
+		element = WebDriverWait(self.browser,10).until(
 			EC.presence_of_element_located((By.ID,"uniqName_1_7"))
 		)
 	finally:
-		return 0 
+		finallycomplete = 1
+
+	self.assertIn(1,finallycomplete)
 		
 
     def tearDown(self):
