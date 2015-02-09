@@ -8,3 +8,5 @@ sleep 1
 xvfb-run  python test_swsdp.py
 sleep 1
 xvfb-run  python test_search.py
+sleep 1
+xvfb-run  python test_imap.py
