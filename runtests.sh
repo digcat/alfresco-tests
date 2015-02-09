@@ -1,3 +1,4 @@
+sleep 1 
 xvfb-run  python test_cmis.py
 sleep 1
 xvfb-run  python test_ftp.py

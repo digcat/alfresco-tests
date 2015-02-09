@@ -1,10 +1,11 @@
 user: admin
 passwd: admin
-url: http://docs.digcat.com:8080
+url: https://docs.digcat.com
 browser: firefox
 cmisurl: /alfresco/cmisatom
-ftpurl: docs.digcat.com 
+ftpurl: 192.168.1.145
 ftpport: 2021
 ftpsrc: /Alfresco/Sites/swsdp/documentLibrary/Presentations
 ftpsrcfile: Project Overview.ppt
-
+imap_host: docs.digcat.com
+imap_port: 8143
