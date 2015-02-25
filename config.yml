@@ -2,8 +2,8 @@ user: admin
 passwd: admin
 url: https://docs.digcat.com
 browser: firefox
-cmisurl: /alfresco/cmisatom
-ftpurl: 192.168.1.145
+cmisurl: /alfresco/api/-default-/public/cmis/versions/1.1/browser 
+ftpurl: docs.digcat.com
 ftpport: 2021
 ftpsrc: /Alfresco/Sites/swsdp/documentLibrary/Presentations
 ftpsrcfile: Project Overview.ppt
