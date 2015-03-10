@@ -1,12 +1,4 @@
-sleep 1 
-xvfb-run  python test_cmis.py
-sleep 1
-xvfb-run  python test_ftp.py
-sleep 1
-xvfb-run  python test_ex_swsdp.py
-sleep 1
-xvfb-run  python test_swsdp.py
-sleep 1
-xvfb-run  python test_search.py
-sleep 1
-xvfb-run  python test_imap.py
+xvfb-run python test_share.py
+xvfb-run python test_rm.py
+xvfb-run python test_jsconsole.py
+xvfb-run python test_services.py
