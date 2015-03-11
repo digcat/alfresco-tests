@@ -1,5 +1,3 @@
-
-
 from element import BasePageElement
 from locators import MainPageLocators
 from selenium import webdriver
@@ -39,32 +37,30 @@ class MainPage(BasePage):
 	element.click()
     
     def click_create_site(self):
-	vars = testconfig.getVars(self)	
-	now = datetime.datetime.now()
-	today = now.strftime("%H%M%y%m%d") 
-	sitename = today + ' Site'
-	element = self.driver.find_element(*MainPageLocators.MAINMENU_SITES)
-	element.click()
-	element = self.driver.find_element(*MainPageLocators.RMCREATESITE_BUTTON)
-	element.click()
-	element = self.driver.find_element(*MainPageLocators.RMCREATESITE_NAME)
-	element.click()
-        element = self.driver.find_element_by_id('alfresco-rm-createSite-instance-ok-button-button')
-	element = self.driver.find_element_by_name('title')
-	element.send_keys(sitename)
-	element.click()
-	element = self.driver.find_element_by_name('description')
-	element.send_keys(today + ' free text description')
-	element.click()
-	#element = self.driver.find_element_by_name('shortName')
-	#element.send_keys(today)
-	element = self.driver.find_element_by_name('sitePreset')
-	element.send_keys("C")
-	element.click()
-	element = self.driver.find_element_by_id('alfresco-rm-createSite-instance-ok-button-button')
-	element.click()
-	element = self.driver.get(vars.url + '/share/page/console/admin-console/manage-sites')
-	
+        vars = testconfig.getVars(self)
+        now = datetime.datetime.now()
+        today = now.strftime("%H%M%y%m%d")
+        sitename = today + ' Site'
+        element = self.driver.find_element(*MainPageLocators.MAINMENU_SITES)
+        element.click()
+        element = self.driver.find_element(*MainPageLocators.RMCREATESITE_BUTTON)
+        element.click()
+        WebDriverWait(self.driver, 10).until(lambda s: s.find_element(*MainPageLocators.RMCREATESITE_NAME).is_displayed())
+        WebDriverWait(self.driver, 10).until(lambda s: s.find_element(*MainPageLocators.RMCREATESITE_SUBMIT).is_displayed())
+        element = self.driver.find_element(*MainPageLocators.RMCREATESITE_NAME)
+        element.click()
+        element.send_keys(sitename)
+        element = self.driver.find_element_by_name('description')
+        element.send_keys(today + ' free text description')
+        element.click()
+        element = self.driver.find_element_by_name('shortName')
+        element.send_keys(today)
+        element = self.driver.find_element_by_name('sitePreset')
+        element.send_keys("C")
+        element.click()
+        element = self.driver.find_element(*MainPageLocators.RMCREATESITE_SUBMIT)
+        element.click()
+        element = self.driver.get(vars.url + '/share/page/console/admin-console/manage-sites')	
 
     def click_delete_site(self):
 	vars = testconfig.getVars(self)
