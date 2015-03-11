@@ -6,9 +6,9 @@ class MainPageLocators(object):
     MAINMENU_SITES = (By.ID, 'HEADER_SITES_MENU')
 
     CREATESITE_BUTTON 		= (By.ID, 'HEADER_SITES_MENU_CREATE_SITE_text')
-    CREATESITE_NAME 		= (By.ID,'alfresco-createSite-instance-title')
+    CREATESITE_NAME 		= (By.ID, 'alfresco-createSite-instance-title')
     CREATESITE_DESCRIPTION 	= (By.ID, 'alfresco-createSite-instance-description')
-    CREATESITE_PREFIX 		= (By.ID,'alfresco-createSite-instance-sitePreset')
+    CREATESITE_PREFIX 		= (By.ID, 'alfresco-createSite-instance-sitePreset')
     CREATESITE_VISIBILITY 	= (By.ID, 'alfresco-createSite-instance-isPublic')
     CREATESITE_SUBMIT 		= (By.ID, 'alfresco-createSite-instance-ok-button-button')
 
