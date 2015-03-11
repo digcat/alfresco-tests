@@ -2,15 +2,15 @@
 
 Python Selenium Tests
 
-Coverage
+Test Coverage
 
-test_share		    alfresco share urls
+11 test_share (alfresco share urls)
 
-test_rm  		      records management
+14 test_rm (records management)
 
-test_jsconsole		JSConsole Addon
+02 test_jsconsole (JSConsole Addon)
 
-test_services		  FTP/CMIS
+01 test_services (FTP/CMIS)
 
 with Xvfb-run installed
 
