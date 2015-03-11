@@ -23,4 +23,4 @@ launch ./runtests.sh to run headless
 launch from command line, python <testname> to see test interactively
 
 
-If you can help with creating new tests please fork and provide us a pull request.  We are aiming to help <a href="www.orderofthebee.org">OOTB</a> with a reliable test suite, so any help is gratefully received
+If you can help with creating new tests please fork and provide us a pull request.  We are aiming to help <a href="http://www.orderofthebee.org">OOTB</a> with a reliable test suite, so any help is gratefully received
