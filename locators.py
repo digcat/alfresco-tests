@@ -12,11 +12,10 @@ class MainPageLocators(object):
     CREATESITE_VISIBILITY 	= (By.ID, 'alfresco-createSite-instance-isPublic')
     CREATESITE_SUBMIT 		= (By.ID, 'alfresco-createSite-instance-ok-button-button')
 
-
     RMCREATESITE_BUTTON 	= (By.ID, 'HEADER_SITES_MENU_CREATE_SITE_text')
     RMCREATESITE_NAME 		= (By.ID, 'alfresco-rm-createSite-instance-title')
     RMCREATESITE_DESCRIPTION 	= (By.ID, 'alfresco-rm-createSite-instance-description')
-    RMCREATESITE_PREFIX 	= (By.ID,'alfresco-rm-createSite-instance-sitePreset')
+    RMCREATESITE_PREFIX 	= (By.ID, 'alfresco-rm-createSite-instance-sitePreset')
     RMCREATESITE_VISIBILITY 	= (By.ID, 'alfresco-rm-createSite-instance-isPublic')
     RMCREATESITE_SUBMIT 	= (By.ID, 'alfresco-rm-createSite-instance-ok-button-button')
 
