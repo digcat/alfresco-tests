@@ -91,7 +91,7 @@ class RMPage(RMBasePage):
     
     def click_rm_tools_user_and_groups_button(self):
 	vars = testconfig.getVars(self)
-	element = self.driver.get(vars.url + '/share/page/console/rm-console/rm-user-and-groups')
+	element = self.driver.get(vars.url + '/share/page/console/rm-console/rm-users-and-groups')
     
     def click_rm_search_button(self):
 	vars = testconfig.getVars(self)
