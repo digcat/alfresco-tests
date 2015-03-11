@@ -5,14 +5,12 @@ import page
 import page_jsconsole
 import testconfig
 
-"""  Test MyAlfresco """
-"""  Author: DigCat.com """
+"""  testJSConsoleMyAlfresco """
 
 class testJSConsoleMyAlfresco(unittest.TestCase):
     """ testJSConsoleMyAlfresco Class """
 
     def setUp(self):
-
         """ Setup browser and connection """
 	self = testconfig.getVars(self)
 	self.driver = testconfig.setBrowser(self)
