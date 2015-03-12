@@ -89,7 +89,11 @@ class testMyAlfresco(unittest.TestCase):
     def test_alfresco_create_site(self):
         main_page = page.MainPage(self.driver)
 	main_page.click_login_button()
-	main_page.click_create_site()
+	sites = 5 
+	a=0
+	while a < sites:
+		main_page.click_create_site()
+		a = a + 1
 	main_page.photo_page()
 	assert main_page,is_title_matches("Site Dashboard","FAIL: to reach new site page")
      

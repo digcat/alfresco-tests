@@ -5,7 +5,6 @@ loginurl: https://docs.digcat.com/share
 browser: firefox
 photopath: images
 
-
 cmisurl: /alfresco/api/-default-/public/cmis/versions/1.1/browser
 ftpurl: docs.digcat.com
 ftpport: 2021
