@@ -89,7 +89,7 @@ class testMyAlfresco(unittest.TestCase):
     def test_alfresco_create_site(self):
         main_page = page.MainPage(self.driver)
 	main_page.click_login_button()
-	sites = 5 
+	sites = 2 
 	a=0
 	while a < sites:
 		main_page.click_create_site()

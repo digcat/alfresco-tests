@@ -10,13 +10,14 @@ class testShareSiteCreatorsMyAlfresco(unittest.TestCase):
     """ testShareSiteCreatorsMyAlfresco Class """
 
     def setUp(self):
-
-        """ Setup browser and connection """
 	self = testconfig.getVars(self)
+        """ Setup browser and connection """
 	self.driver = testconfig.setBrowser(self)
 	self.driver.get(self.loginurl)
 
     def test_shareSiteCreator_groups(self):
+	if "share_site_creators" not in self.addons:
+		return self.tearDown() 
         main_page = page.MainPage(self.driver)
 	main_page.click_login_button()
 	main_page.click_admin_user_groups()
