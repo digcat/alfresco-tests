@@ -1,3 +1,4 @@
+set -e
 DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
 sudo apt-get install python
 sudo apt-get install xvfb x11-xkb-utils 
