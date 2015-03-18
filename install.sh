@@ -1,4 +1,4 @@
-sudo DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
+DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
 sudo apt-get install python
 sudo apt-get install xvfb x11-xkb-utils 
 sudo apt-get install xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic x11-apps
@@ -9,4 +9,3 @@ sudo pip install selenium
 sudo pip install configure
 sudo pip install configuration
 sudo apt-get update
-sudo apt-get upgrade
