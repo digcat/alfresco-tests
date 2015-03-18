@@ -9,4 +9,3 @@ sudo easy_install cmislib  ### uses 0.51 cmislib
 sudo pip install selenium
 sudo pip install configure
 sudo pip install configuration
-sudo apt-get update
