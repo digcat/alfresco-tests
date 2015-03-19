@@ -1,3 +1,4 @@
+#!/bin/bash
 trap 'exit 1' ERR
 set -x
 sudo xvfb-run python test_share.py
