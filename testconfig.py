@@ -26,4 +26,6 @@ def setBrowser(self):
                 return webdriver.Firefox()
         if self.testbrowser == 'chrome':
                 return webdriver.Chrome()
+        if self.testbrowser == 'phantomjs':
+                return webdriver.PhantomJS('/usr/local/bin/phantomjs')
 
