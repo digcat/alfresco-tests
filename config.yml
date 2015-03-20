@@ -1,12 +1,12 @@
 user: admin
 passwd: admin
-url: http://localhost:8080
-loginurl: http://localhost:8080/share
+url: http://docs.digcat.com:8080
+loginurl: http://docs.digcat.com:8080/share
 browser: firefox
 photopath: images
 addons: rm,jsconsole,share_site_creators
 cmisurl: /alfresco/api/-default-/public/cmis/versions/1.1/browser
-ftpurl: localhost
+ftpurl: docs.digcat.com
 ftpport: 2021
-imap_host: localhost
+imap_host: docs.digcat.com
 imap_port: 8143
