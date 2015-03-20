@@ -1,11 +1,17 @@
 #!/bin/bash
-trap 'exit 1' ERR
+trap 'exit 9' ERR
 set -x
-sudo xvfb-run python test_share.py
-if [ $0 != 0 ]; then exit 99; fi
-sudo xvfb-run python test_rm.py
-if [ $0 != 0 ]; then exit 99; fi
-sudo xvfb-run python test_jsconsole.py
-if [ $0 != 0 ]; then exit 99; fi
-#xvfb-run python test_services.py
-#xvfb-run python test_share_site_creators.py
+CMD="sudo xvfb-run -e /dev/stdout python"
+
+#TESTS="share rm jsconsole services share_site_creators"
+TESTS="share rm jsconsole"
+
+for t in $TESTS
+do
+  $CMD test_{$t}.py
+  # actually the trap line at top should handle this
+  # if errorlevel==9 then the trap got it, if 99 then this
+  if [ $0 != 0 ]; then exit 99; fi
+done
+
+
