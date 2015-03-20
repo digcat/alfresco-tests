@@ -1,6 +1,6 @@
 set -e
 export DISPLAY=:0.0 
-sudo xvfb-run -a python test_share.py
+sudo xvfb-run -e /dev/stdout -a python test_share.py
 if [ $0 != 0 ]; then exit 99; fi
 sudo xvfb-run -a python test_rm.py
 if [ $0 != 0 ]; then exit 99; fi
