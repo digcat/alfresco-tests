@@ -11,7 +11,7 @@ do
   $CMD test_{$t}.py
   # actually the trap line at top should handle this
   # if errorlevel==9 then the trap got it, if 99 then this
-  if [ $0 != 0 ]; then exit 99; fi
+  if [ $? != 0 ]; then exit 99; fi
 done
 
 
