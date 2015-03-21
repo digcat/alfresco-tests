@@ -7,16 +7,32 @@ def getVars(self):
 	config = Configuration.from_file('./config.yml').configure()
 		
 	self.testbrowser  = config['browser']
-	self.url      	  = config['url']
+	
+	host = config['host']	
+	port = config['port']		
+	
+	if config['https'] is True:
+		uri = 'https'
+	else:	
+		uri = 'http'
+
+	if port is None:
+		self.url = uri + '://' + host 
+	else:
+		self.url = uri + '://' + host + ':' + port
+
+	
 	self.username 	  = config['user']
 	self.password 	  = config['passwd']
-	self.loginurl  	  = config['loginurl']
+	self.loginurl  	  = self.url + config['loginurl']
 	self.photopath 	  = config['photopath']
 	self.cmisurl      = config['cmisurl']
 	self.ftpurl       = config['ftpurl']
 	self.ftpport      = config['ftpport']
 	self.imap_host 	  = config['imap_host']
 	self.imap_port    = config['imap_port']
+	
+	print self.loginurl
 		
 	return self
 

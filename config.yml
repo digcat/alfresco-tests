@@ -1,9 +1,11 @@
 user: admin
 passwd: admin
-url: http://localhost:8080
-loginurl: http://localhost:8080/share
+host: vagrant-ubuntu-trusty-64
+port:
+https: true
+loginurl: /share
 browser: firefox
-photopath: 
+photopath: images
 cmisurl: /alfresco/api/-default-/public/cmis/versions/1.1/browser
 ftpurl: localhost
 ftpport: 2021
