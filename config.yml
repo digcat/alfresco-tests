@@ -1,9 +1,9 @@
 user: admin
 passwd: admin
-url: https://localhost
-loginurl: https://localhost/share
+url: http://localhost:8080
+loginurl: http://localhost:8080/share
 browser: firefox
-photopath: images
+photopath: 
 cmisurl: /alfresco/api/-default-/public/cmis/versions/1.1/browser
 ftpurl: localhost
 ftpport: 2021
