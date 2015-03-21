@@ -1,6 +1,6 @@
 user: admin
 passwd: admin
-host: vagrant-ubuntu-trusty-64
+host: localhost
 port:
 https: true
 loginurl: /share
