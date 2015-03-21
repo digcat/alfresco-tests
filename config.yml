@@ -1,7 +1,7 @@
 user: admin
 passwd: admin
-url: http://docs.digcat.com:8080
-loginurl: http://docs.digcat.com:8080/share
+url: https://localhost:8080
+loginurl: https://localhost:8080/share
 browser: firefox
 photopath: images
 addons: rm,jsconsole,share_site_creators
