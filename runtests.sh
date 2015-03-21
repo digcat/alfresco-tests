@@ -1,7 +1,7 @@
 #!/bin/bash
 trap 'exit 9' ERR
 set -x
-CMD="sudo xvfb-run -a -e /dev/stdout python"
+CMD="sudo xvfb-run -a python"
 
 #TESTS="share rm jsconsole services share_site_creators"
 TESTS="share rm jsconsole"
