@@ -4,7 +4,6 @@ url: https://localhost
 loginurl: https://localhost/share
 browser: firefox
 photopath: images
-addons: rm,jsconsole,share_site_creators
 cmisurl: /alfresco/api/-default-/public/cmis/versions/1.1/browser
 ftpurl: localhost
 ftpport: 2021

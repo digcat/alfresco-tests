@@ -4,6 +4,7 @@ from selenium import webdriver
 import page
 import page_jsconsole
 import testconfig
+import fast_selenium
 
 """  testJSConsoleMyAlfresco """
 

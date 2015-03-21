@@ -3,6 +3,7 @@ from selenium import webdriver
 
 import page
 import testconfig
+import fast_selenium
 
 """  TestServicesMyAlfresco """
 

@@ -3,6 +3,7 @@ from selenium import webdriver
 
 import page
 import testconfig
+import fast_selenium
 
 """  Test MyAlfresco """
 """  Author: DigCat.com """
@@ -15,7 +16,9 @@ class testMyAlfresco(unittest.TestCase):
         """ Setup browser and connection """
 	self = testconfig.getVars(self)
 	self.driver = testconfig.setBrowser(self)
-        self.driver.get(self.loginurl)
+	self.driver.get(self.loginurl)
+	if "Alfresco" not in self.driver.title:
+		raise Exception("Cant get to login page")
 
     def test_alfresco_login(self):
         main_page = page.MainPage(self.driver)
@@ -89,7 +92,7 @@ class testMyAlfresco(unittest.TestCase):
     def test_alfresco_create_site(self):
         main_page = page.MainPage(self.driver)
 	main_page.click_login_button()
-	sites = 2 
+	sites = 1 
 	a=0
 	while a < sites:
 		main_page.click_create_site()

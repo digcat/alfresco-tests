@@ -4,6 +4,7 @@ from selenium import webdriver
 import page
 import page_rm
 import testconfig
+import fast_selenium
 
 """  Test MyAlfresco """
 """  Author: DigCat.com """

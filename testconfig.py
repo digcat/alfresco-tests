@@ -17,7 +17,6 @@ def getVars(self):
 	self.ftpport      = config['ftpport']
 	self.imap_host 	  = config['imap_host']
 	self.imap_port    = config['imap_port']
-	self.addons 	  = config['addons']
 		
 	return self
 
