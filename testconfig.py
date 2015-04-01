@@ -21,7 +21,7 @@ def getVars(self):
 	else:
 		self.url = uri + '://' + host + ':' + port
 
-	
+	self.host	  = config['host']	
 	self.username 	  = config['user']
 	self.password 	  = config['passwd']
 	self.loginurl  	  = self.url + config['loginurl']
