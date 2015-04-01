@@ -6,7 +6,7 @@ PYTH=${args[0]}
 
 CMD="xvfb-run -a $PYTH/python"
 
-#TESTS="share rm jsconsole services share_site_creators port8080"
+#TESTS="share rm jsconsole services share_site_creators"
 TESTS="share rm jsconsole"
 
 for t in $TESTS
