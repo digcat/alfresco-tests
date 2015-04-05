@@ -36,7 +36,12 @@ class MainPage(BasePage):
 	element.send_keys('meetings')
 	element = self.driver.find_element(*MainPageLocators.SEARCH_BUTTON)
 	element.click()
-    
+   
+    def click_create_site_mainmenu(self):
+	vars = testconfig.getVars(self)
+	element = self.driver.find_element(*MainPageLocators.MAINMENU_SITES)
+        element.click()
+ 
     def click_create_site(self):
         vars = testconfig.getVars(self)
         now = datetime.datetime.now()

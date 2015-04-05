@@ -24,9 +24,9 @@ class testShareSiteCreatorsMyAlfresco(unittest.TestCase):
 	main_page.photo_page()
 	sitetest = ''
 	try:
-		main_page.click_create_site()
-		sitetest = 'Site Created'
+		main_page.click_create_site_mainmenu()
 		main_page.photo_page()
+		sitetest = 'Site Created'
 	except:
 		sitetest = 'No Site'
         
