@@ -22,11 +22,6 @@ Current Test Coverage
 
 01 test_services (FTP/CMIS)
 
-with Xvfb-run installed
-
-launch ./runtests.sh to run headless
+launch ./install.sh to run headless
 
 launch from command line, python <testname> to see test interactively
-
-
-If you can help with creating new tests please fork and provide us a pull request.  Helping <a href="http://www.orderofthebee.org">OOTB</a> with a reliable test suite
