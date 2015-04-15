@@ -28,7 +28,7 @@ def getVars(self):
 	self.photopath 	  = config['photopath']
 	self.cmisurl      = config['cmisurl']
 	self.cmisatom 	  = self.url + config['cmisatom']
-	self.ftpurl       = config['ftpurl']
+	self.ftpurl       = config['host']
 	self.ftpport      = config['ftpport']
 	self.imap_host 	  = config['imap_host']
 	self.imap_port    = config['imap_port']

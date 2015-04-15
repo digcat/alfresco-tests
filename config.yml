@@ -8,7 +8,6 @@ browser: firefox
 photopath: images
 cmisurl: /alfresco/api/-default-/public/cmis/versions/1.1/browser
 cmisatom: /alfresco/cmisatom
-ftpurl: localhost
 ftpport: 2021
 imap_host: localhost
 imap_port: 8143

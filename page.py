@@ -41,6 +41,33 @@ class MainPage(BasePage):
 	vars = testconfig.getVars(self)
 	element = self.driver.find_element(*MainPageLocators.MAINMENU_SITES)
         element.click()
+
+
+    def click_create_siteforpreviews(self,sitename):
+        vars = testconfig.getVars(self)
+        now = datetime.datetime.now()
+        today = now.strftime("%H%M%S%y%m%d")
+        element = self.driver.find_element(*MainPageLocators.MAINMENU_SITES)
+        element.click()
+        element = self.driver.find_element(*MainPageLocators.RMCREATESITE_BUTTON)
+        element.click()
+        WebDriverWait(self.driver, 10).until(lambda s: s.find_element(*MainPageLocators.RMCREATESITE_NAME).is_displayed())
+        WebDriverWait(self.driver, 10).until(lambda s: s.find_element(*MainPageLocators.RMCREATESITE_SUBMIT).is_displayed())
+        element = self.driver.find_element(*MainPageLocators.RMCREATESITE_NAME)
+        element.click()
+        element.send_keys(sitename)
+        element = self.driver.find_element_by_name('description')
+        element.send_keys('site to test previews')
+        element.click()
+        #element = self.driver.find_element_by_name('shortName')
+        #element.send_keys(sitename)
+        element = self.driver.find_element_by_name('sitePreset')
+        element.send_keys("C")
+        element.click()
+        element = self.driver.find_element(*MainPageLocators.RMCREATESITE_SUBMIT)
+        element.click()
+        element = self.driver.get(vars.url + '/share/page/console/admin-console/manage-sites')
+
  
     def click_create_site(self):
         vars = testconfig.getVars(self)
@@ -118,7 +145,7 @@ class MainPage(BasePage):
     def click_admin_user_groups_browse(self):
 	vars = testconfig.getVars(self)
 	element = self.driver.find_element(*MainPageLocators.AC_GROUP_INPUT)
-	element.send_keys('GROUP_SITE_CREATORS')
+	element.send_keys('SITE_CREATORS')
 	element = self.driver.find_element(*MainPageLocators.AC_GROUP_BROWSE)
 	element.click()
 	try:

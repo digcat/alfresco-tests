@@ -33,6 +33,7 @@ venv/bin/pip install selenium --upgrade
 venv/bin/pip install configure --upgrade
 venv/bin/easy_install PyYAML
 venv/bin/easy_install cmislib
+venv/bin/easy_install nose multiprocessing
 cd $ROOT
 ./runtests.sh ./testing_virt/venv/bin
 
