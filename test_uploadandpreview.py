@@ -20,10 +20,15 @@ class testUploadAndPreviewMyAlfresco(unittest.TestCase):
         self.driver.get(self.loginurl)
 
     def test_UploadAndPreview_alfresco_upload(self):
+	import time
         main_page = page.MainPage(self.driver)
 	main_page.click_login_button()
-	sitename = '12testdocsite'
+	sitename = '17testdocsite'
 	main_page.click_create_siteforpreviews(sitename)
+	time.sleep(30)	
+
+    def test_UploadAndPreview_alfresco_ftp(self):
+	sitename = '16testdocsite'
         f = ftplib.FTP()
         f.connect(self.ftpurl,port=self.ftpport)
         f.login(self.username,self.password)	
@@ -34,7 +39,7 @@ class testUploadAndPreviewMyAlfresco(unittest.TestCase):
         		full_fname = os.path.join(root, fname)
 			fulldestination = destination
 			print fulldestination
-        		f.storbinary('STOR ' + fulldestination, open(full_fname, 'rb'))
+        		f.storbinary('STOR ' + fulldestination + '/' + fname, open(full_fname, 'rb'))
 			filestotest.append('site/' + sitename + '/documentlibrary/' + fname)
 
 	print f.pwd()
