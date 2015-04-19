@@ -23,7 +23,7 @@ class testUploadAndPreviewMyAlfresco(unittest.TestCase):
 	import time
         main_page = page.MainPage(self.driver)
 	main_page.click_login_button()
-	sitename = '17testdocsite'
+	sitename = 'Alfresco-Hackathon'
 	main_page.click_create_siteforpreviews(sitename)
 	time.sleep(30)	
 
