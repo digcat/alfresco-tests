@@ -28,7 +28,7 @@ class testUploadAndPreviewMyAlfresco(unittest.TestCase):
 	time.sleep(30)	
 
     def test_UploadAndPreview_alfresco_ftp(self):
-	sitename = '16testdocsite'
+	sitename = 'Alfresco-Hackathon'
         f = ftplib.FTP()
         f.connect(self.ftpurl,port=self.ftpport)
         f.login(self.username,self.password)	
