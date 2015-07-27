@@ -10,6 +10,7 @@ import inspect
 import datetime
 import testconfig
 import os
+import time
 
 class BasePage(object):
 
@@ -35,8 +36,24 @@ class MainPage(BasePage):
 	element = self.driver.find_element(*MainPageLocators.SEARCH_FORM)
 	element.send_keys('meetings')
 	element = self.driver.find_element(*MainPageLocators.SEARCH_BUTTON)
-	element.click()
+	for link in element:
+		link.click()
    
+    def click_searchbudgetform(self):
+	vars = testconfig.getVars(self)	
+	self.driver.maximize_window()
+	element = self.driver.get(vars.url + '/share/page/site/swsdp/advsearch')
+	element = self.driver.find_element(*MainPageLocators.SEARCH_FORM)
+	element.send_keys('budget.xls')
+	element = self.driver.find_element(*MainPageLocators.SEARCH_BUTTON)
+	element.click()
+	element = self.driver.find_elements_by_link_text('budget.xls')
+	for item in element:
+			item.click()
+	message = self.driver.find_element_by_xpath("//div[contains(@class, 'message')]")
+	previewmessage = message.get_attribute('innerHTML')
+	return previewmessage.strip()
+
     def click_create_site_mainmenu(self):
 	vars = testconfig.getVars(self)
 	element = self.driver.find_element(*MainPageLocators.MAINMENU_SITES)

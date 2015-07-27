@@ -31,3 +31,5 @@ class MainPageLocators(object):
     AC_DEL_REMOVE 		= (By.ID, 'uniqName_1_')
     AC_DEL_DELETE 		= (By.ID, 'alfresco_menus_AlfMenuItem___')
     AC_DEL_CONFIRM 		= (By.ID, 'alfresco_buttons_AlfButton__')
+    PREVIEW_CLASS			= (By.CLASS_NAME, 'alfresco-navigation-_HtmlAnchorMixin')
+    PREVIEW_ID				= (By.ID, 'uniqName_65_0')
