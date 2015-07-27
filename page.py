@@ -23,40 +23,44 @@ class MainPage(BasePage):
         return string in self.driver.title
     
     def click_login_button(self):
-	vars = testconfig.getVars(self)	
-	element = self.driver.find_element_by_name('username')
-	element.send_keys(vars.username)
-	element = self.driver.find_element_by_name('password')
-	element.send_keys(vars.password)
-	element.submit()
+       vars = testconfig.getVars(self)	
+       element = self.driver.find_element_by_name('username')
+       element.send_keys(vars.username)
+       element = self.driver.find_element_by_name('password')
+       element.send_keys(vars.password)
+       element.submit()
     
     def click_searchform(self):
-	vars = testconfig.getVars(self)	
-	element = self.driver.get(vars.url + '/share/page/site/swsdp/advsearch')
-	element = self.driver.find_element(*MainPageLocators.SEARCH_FORM)
-	element.send_keys('meetings')
-	element = self.driver.find_element(*MainPageLocators.SEARCH_BUTTON)
-	for link in element:
-		link.click()
+       vars = testconfig.getVars(self)	
+       self.driver.maximize_window()
+       element = self.driver.get(vars.url + '/share/page/site/swsdp/advsearch')
+       element = self.driver.find_element(*MainPageLocators.SEARCH_FORM)
+       element.send_keys('meetings')
+       element = self.driver.find_element(*MainPageLocators.SEARCH_BUTTON)
+       element.click()
    
     def click_searchbudgetform(self):
-	vars = testconfig.getVars(self)	
-	self.driver.maximize_window()
-	element = self.driver.get(vars.url + '/share/page/site/swsdp/advsearch')
-	element = self.driver.find_element(*MainPageLocators.SEARCH_FORM)
-	element.send_keys('budget.xls')
-	element = self.driver.find_element(*MainPageLocators.SEARCH_BUTTON)
-	element.click()
-	element = self.driver.find_elements_by_link_text('budget.xls')
-	for item in element:
-			item.click()
-	message = self.driver.find_element_by_xpath("//div[contains(@class, 'message')]")
-	previewmessage = message.get_attribute('innerHTML')
-	return previewmessage.strip()
+       vars = testconfig.getVars(self)	
+       self.driver.maximize_window()
+       element = self.driver.get(vars.url + '/share/page/site/swsdp/advsearch')
+       element = self.driver.find_element(*MainPageLocators.SEARCH_FORM)
+       element.send_keys('budget.xls')
+       element = self.driver.find_element(*MainPageLocators.SEARCH_BUTTON)
+       element.click()
+       element = self.driver.find_elements_by_link_text('budget.xls')
+       for item in element:
+          item.click()
+          try:
+             message = self.driver.find_element_by_xpath("//div[contains(@class, 'message')]")
+             previewmessage = message.get_attribute('innerHTML')
+             time.sleep(5)
+          except:
+             previewmessage = "Preview Good"
+          return previewmessage.strip()
 
     def click_create_site_mainmenu(self):
-	vars = testconfig.getVars(self)
-	element = self.driver.find_element(*MainPageLocators.MAINMENU_SITES)
+        vars = testconfig.getVars(self)
+        element = self.driver.find_element(*MainPageLocators.MAINMENU_SITES)
         element.click()
 
 

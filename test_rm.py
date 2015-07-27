@@ -15,18 +15,18 @@ class testRecordManagementMyAlfresco(unittest.TestCase):
     def setUp(self):
 
         """ Setup browser and connection """
-	self = testconfig.getVars(self)
-	self.driver = testconfig.setBrowser(self)
+        self = testconfig.getVars(self)
+        self.driver = testconfig.setBrowser(self)
         self.driver.get(self.loginurl)
 
     def test_RM_alfresco_login(self):
         main_page = page.MainPage(self.driver)
-	main_page.click_login_button()
-	main_page.photo_page()
+        main_page.click_login_button()
+        main_page.photo_page()
         assert main_page.is_title_matches("Dashboard"),"FAIL: didnt make it to dashboard on login ! Check Credentials"
 	
     def test_RM_create_site(self):
-	rm_page = page_rm.RMPage(self.driver)	
+        rm_page = page_rm.RMPage(self.driver)	
         rm_page.click_login_button()
         rm_page.click_create_recordsmanagement_button()
         main_page = page.MainPage(self.driver)
@@ -35,18 +35,18 @@ class testRecordManagementMyAlfresco(unittest.TestCase):
 
     def test_RM_goto_peoplefinder(self):
         main_page = page.MainPage(self.driver)
-	main_page.click_login_button()
-	main_page.click_people_finder()
-	main_page.photo_page()
-	assert main_page,is_title_matches("People", "FAIL: to reach the People page")
+        main_page.click_login_button()
+        main_page.click_people_finder()
+        main_page.photo_page()
+        assert main_page,is_title_matches("People", "FAIL: to reach the People page")
 
     def test_RM_goto_rm_tools(self):
-	rm_page = page_rm.RMPage(self.driver)	
-	rm_page.click_login_button()
-	rm_page.click_rm_tools_button()
+        rm_page = page_rm.RMPage(self.driver)	
+        rm_page.click_login_button()
+        rm_page.click_rm_tools_button()
         main_page = page.MainPage(self.driver)
-	main_page.photo_page()
-	assert main_page,is_title_matches("RM Admin Tools", "FAIL: to reach RM admin tools page")
+        main_page.photo_page()
+        assert main_page,is_title_matches("RM Admin Tools", "FAIL: to reach RM admin tools page")
 
     def test_RM_goto_rm_tools_audit(self):
         rm_page = page_rm.RMPage(self.driver)
