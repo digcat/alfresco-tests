@@ -33,7 +33,11 @@ class MainPage(BasePage):
     def click_searchform(self):
        vars = testconfig.getVars(self)	
        self.driver.maximize_window()
-       element = self.driver.get(vars.url + '/share/page/site/swsdp/advsearch')
+       try:
+          element = self.driver.get(vars.url + '/share/page/site/swsdp/advsearch')
+       except:
+          print "Cant locate advanced search"
+
        element = self.driver.find_element(*MainPageLocators.SEARCH_FORM)
        element.send_keys('meetings')
        element = self.driver.find_element(*MainPageLocators.SEARCH_BUTTON)
