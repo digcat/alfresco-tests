@@ -23,7 +23,6 @@ class testPreviewAlfresco(unittest.TestCase):
     def test_alfresco_login(self):
         main_page = page.MainPage(self.driver)
         main_page.click_login_button()
-        main_page.photo_page()
         assert main_page.is_title_matches("Dashboard"),"FAIL: didnt make it to dashboard on login ! Check Credentials"
 	
     def test_alfresco_goto_searchsolr(self):
