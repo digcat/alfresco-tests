@@ -28,11 +28,14 @@ class RMPage(RMBasePage):
         element.submit()
 
     def click_create_recordsmanagement_button(self):
-	vars = testconfig.getVars(self)
+        vars = testconfig.getVars(self)
         now = datetime.datetime.now()
         today = now.strftime("%H%M%y%m%d")
         sitename = today + ' Site'
-        element = self.driver.find_element(*MainPageLocators.MAINMENU_SITES)
+        try:
+        	element = self.driver.find_element(*MainPageLocators.MAINMENU_SITES)
+        except:
+					return
         element.click()
         element = self.driver.find_element(*MainPageLocators.RMCREATESITE_BUTTON)
         element.click()
@@ -49,52 +52,50 @@ class RMPage(RMBasePage):
         element = self.driver.find_element_by_name('sitePreset')
         element.send_keys("R")
         element.click()
-	element = self.driver.find_element(*MainPageLocators.RMCREATESITE_SUBMIT)
+        element = self.driver.find_element(*MainPageLocators.RMCREATESITE_SUBMIT)
         element.click()
         element = self.driver.get(vars.url + '/share/page/console/admin-console/manage-sites')
 
     def click_rm_tools_button(self):
-	vars = testconfig.getVars(self)
-	element = self.driver.get(vars.url + '/share/page/console/rm-console/')
+        vars = testconfig.getVars(self)
+        element = self.driver.get(vars.url + '/share/page/console/rm-console/')
     
     def click_rm_tools_audit_button(self):
-	vars = testconfig.getVars(self)
-	element = self.driver.get(vars.url + '/share/page/console/rm-console/rm-audit')
+        vars = testconfig.getVars(self)
+        element = self.driver.get(vars.url + '/share/page/console/rm-console/rm-audit')
     
     def click_rm_tools_custom_metadata_button(self):
-	vars = testconfig.getVars(self)
-	element = self.driver.get(vars.url + '/share/page/console/rm-console/rm-custom-metadata')
+        vars = testconfig.getVars(self)
+        element = self.driver.get(vars.url + '/share/page/console/rm-console/rm-custom-metadata')
 
     def click_rm_tools_define_roles_button(self):
-	vars = testconfig.getVars(self)
-	element = self.driver.get(vars.url + '/share/page/console/rm-console/rm-define-roles')
+        vars = testconfig.getVars(self)
+        element = self.driver.get(vars.url + '/share/page/console/rm-console/rm-define-roles')
     
     def click_rm_tools_email_mappings_button(self):
-	vars = testconfig.getVars(self)
-	element = self.driver.get(vars.url + '/share/page/console/rm-console/rm-email-mappings')
+        vars = testconfig.getVars(self)
+        element = self.driver.get(vars.url + '/share/page/console/rm-console/rm-email-mappings')
 
     def click_rm_tools_events_button(self):
-	vars = testconfig.getVars(self)
-	element = self.driver.get(vars.url + '/share/page/console/rm-console/rm-events')
+        vars = testconfig.getVars(self)
+        element = self.driver.get(vars.url + '/share/page/console/rm-console/rm-events')
     
     def click_rm_tools_list_of_values_button(self):
-	vars = testconfig.getVars(self)
-	element = self.driver.get(vars.url + '/share/page/console/rm-console/rm-list-of-values')
+        vars = testconfig.getVars(self)
+        element = self.driver.get(vars.url + '/share/page/console/rm-console/rm-list-of-values')
     
     def click_rm_tools_references_button(self):
-	vars = testconfig.getVars(self)
-	element = self.driver.get(vars.url + '/share/page/console/rm-console/rm-references')
+        vars = testconfig.getVars(self)
+        element = self.driver.get(vars.url + '/share/page/console/rm-console/rm-references')
     
     def click_rm_tools_user_rights_button(self):
-	vars = testconfig.getVars(self)
-	element = self.driver.get(vars.url + '/share/page/console/rm-console/rm-user-rights')
+        vars = testconfig.getVars(self)
+        element = self.driver.get(vars.url + '/share/page/console/rm-console/rm-user-rights')
     
     def click_rm_tools_user_and_groups_button(self):
-	vars = testconfig.getVars(self)
-	element = self.driver.get(vars.url + '/share/page/console/rm-console/rm-users-and-groups')
+        vars = testconfig.getVars(self)
+        element = self.driver.get(vars.url + '/share/page/console/rm-console/rm-users-and-groups')
     
     def click_rm_search_button(self):
-	vars = testconfig.getVars(self)
-	element = self.driver.get(vars.url + '/share/page/site/rm/rmsearch')
-
-
+        vars = testconfig.getVars(self)
+        element = self.driver.get(vars.url + '/share/page/site/rm/rmsearch')
