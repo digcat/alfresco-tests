@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd "`dirname $0`"
+
 ROOT=`pwd`
 
 if [ -e config.yml ] ; then
