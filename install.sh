@@ -16,15 +16,25 @@ fi
 
 if uname -a | grep "Ubuntu" ; then
 	echo "Ubuntu"
+	sudo apt-get install gcc -y
+	sudo apt-get install python-dev -y
 	sudo apt-get install libyaml-dev -y
 	sudo apt-get install python-yaml -y
 	sudo apt-get install git -y
+	sudo apt-get install python-pip -y
+	sudo apt-get install xvfb -y
+	sudo apt-get install firefox -y
 fi
 if uname -a | grep "Centos" ; then
 	echo "Centos"
+	sudo yum install gcc -y
+	sudo yum install python-dev -y
 	sudo yum install libyaml-dev -y
 	sudo yum install python-yaml -y
 	sudo yum install git -y
+	sudo yum install python-pip -y
+	sudo yum install xvfb -y
+	sudo yum install firefox -y
 fi
 
 echo "Build Virtual Environment"
@@ -37,7 +47,6 @@ venv/bin/pip install selenium --upgrade
 venv/bin/pip install configure --upgrade
 venv/bin/easy_install PyYAML
 venv/bin/easy_install cmislib
-venv/bin/easy_install nose multiprocessing
 cd $ROOT
-./runtests.sh ./testing_virt/venv/bin
+#./runtests.sh ./testing_virt/venv/bin
 
