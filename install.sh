@@ -13,6 +13,7 @@ if [ -e testing_virt ] ; then
 	sudo rm -rf testing_virt
 fi
 
+
 if uname -a | grep "Ubuntu" ; then
 	echo "Ubuntu"
 	sudo apt-get install libyaml-dev -y
@@ -27,7 +28,8 @@ if uname -a | grep "Centos" ; then
 fi
 
 echo "Build Virtual Environment"
-pip install virtualenv --upgrade
+sudo pip install --upgrade pip
+sudo pip install virtualenv --upgrade
 mkdir testing_virt ; cd testing_virt
 virtualenv venv
 source venv/bin/activate
