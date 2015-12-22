@@ -8,7 +8,7 @@ HOST=${args[1]}
 CMD="xvfb-run -a $PYTH/python"
 
 #TESTS="share rm jsconsole services share_site_creators"
-TESTS="share jsconsole cmis rm preview"
+TESTS="share jsconsole cmis preview"
 
 for t in $TESTS
 do

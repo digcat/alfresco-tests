@@ -41,7 +41,6 @@ def getVars(self):
     self.imap_host = config['imap_host']
     self.imap_port = config['imap_port']
 
-    print self.repourl
     return self
 
 def setBrowser(self):
