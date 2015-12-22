@@ -1,7 +1,8 @@
 from selenium.webdriver.common.by import By
 
 class MainPageLocators(object):
-    SEARCH_FORM = (By.ID,'page_x002e_search_x002e_advsearch_x0023_default-search-text')
+    #SEARCH_FORM = (By.ID,'page_x002e_search_x002e_advsearch_x0023_default-search-text')
+    SEARCH_FORM = (By.ID,'HEADER_SEARCHBOX_FORM_FIELD')
     SEARCH_BUTTON = (By.ID, 'page_x002e_search_x002e_advsearch_x0023_default-search-button-1-button') 
     MAINMENU_SITES = (By.ID, 'HEADER_SITES_MENU')
 

@@ -94,7 +94,7 @@ class testMyAlfresco(unittest.TestCase):
         sites = 1 
         a=0
         while a < sites:
-          main_page.click_create_site()
+          main_page.click_create_site_no_rm()
           a = a + 1
         main_page.photo_page()
         assert main_page,is_title_matches("Site Dashboard","FAIL: to reach new site page")

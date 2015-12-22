@@ -93,6 +93,32 @@ class MainPage(BasePage):
         element.click()
         element = self.driver.get(vars.url + '/share/page/console/admin-console/manage-sites')
 
+    def click_create_site_no_rm(self):
+        vars = testconfig.getVars(self)
+        now = datetime.datetime.now()
+        today = now.strftime("%H%M%S%y%m%d")
+        sitename = today + ' Site'
+        element = self.driver.find_element(*MainPageLocators.MAINMENU_SITES)
+        element.click()
+        element = self.driver.find_element(*MainPageLocators.CREATESITE_BUTTON)
+        element.click()
+        WebDriverWait(self.driver, 10).until(lambda s: s.find_element(*MainPageLocators.CREATESITE_NAME).is_displayed())
+        WebDriverWait(self.driver, 10).until(lambda s: s.find_element(*MainPageLocators.CREATESITE_SUBMIT).is_displayed())
+        element = self.driver.find_element(*MainPageLocators.CREATESITE_NAME)
+        element.click()
+        element.send_keys(sitename)
+        element = self.driver.find_element_by_name('description')
+        element.send_keys(today + ' free text description')
+        element.click()
+        element = self.driver.find_element_by_name('shortName')
+        element.send_keys(today)
+        element = self.driver.find_element_by_name('sitePreset')
+        element.send_keys("C")
+        element.click()
+        element = self.driver.find_element(*MainPageLocators.CREATESITE_SUBMIT)
+        element.click()
+        element = self.driver.get(vars.url + '/share/page/console/admin-console/manage-sites')	
+
  
     def click_create_site(self):
         vars = testconfig.getVars(self)

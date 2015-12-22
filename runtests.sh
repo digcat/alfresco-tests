@@ -3,6 +3,7 @@ trap 'exit 9' ERR
 set -x
 args=("$@")
 PYTH=${args[0]}
+HOST=${args[1]}
 
 CMD="xvfb-run -a $PYTH/python"
 
