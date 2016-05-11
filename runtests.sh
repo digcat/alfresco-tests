@@ -17,8 +17,10 @@ do
   $CMD test_$t.py
   if [ $? != 0 ] 
 	then 
+		echo " >>> $t FAIL"
 		touch /tmp/testres/${t}_FAIL
 	else
+		echo " >>> $t PASS"
 		touch /tmp/testres/${t}_PASS
 	fi
 done
