@@ -14,11 +14,11 @@ if [ -e testing_virt ] ; then
 fi
 
 
-if -f /etc/debian_version ; then
+if [ -f /etc/debian_version ] ; then
 	echo "Ubuntu"
 	sudo apt-get install -y gcc python-dev libyaml-dev python-yaml git python-pip xvfb firefox
 fi
-if -f /etc/redhat-release ; then
+if [ -f /etc/redhat-release ] ; then
 	echo "Centos"
 	sudo yum install -y gcc python-dev libyaml-dev python-yaml git python-pip xvfb firefox
 fi
