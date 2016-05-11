@@ -14,8 +14,11 @@ rm -rf /tmp/testres
 mkdir -p /tmp/testres
 for t in $TESTS
 do
-  $CMD test_$t.py 2>&1 | tee /tmp/testres/${t}_output
-  if [ $? != 0 ] 
+	(
+    $CMD test_$t.py 
+		RES=$?
+	) 2>&1 | tee /tmp/testres/${t}_output
+  if [ $RES != 0 ] 
 	then 
 		echo " >>> $t FAIL"
 		touch /tmp/testres/${t}_FAIL
