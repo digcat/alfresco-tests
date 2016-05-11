@@ -20,7 +20,7 @@ if [ -f /etc/debian_version ] ; then
 fi
 if [ -f /etc/redhat-release ] ; then
 	echo "Centos"
-	sudo yum install -y gcc python-dev libyaml-dev python-yaml git python-pip xvfb firefox
+	sudo yum install -y gcc python-dev libyaml-dev python-yaml git python-pip xvfb firefox yum info xorg-x11-server-Xvfb
 fi
 
 echo "Build Virtual Environment"
