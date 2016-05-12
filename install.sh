@@ -14,27 +14,13 @@ if [ -e testing_virt ] ; then
 fi
 
 
-if uname -a | grep "Ubuntu" ; then
+if [ -f /etc/debian_version ] ; then
 	echo "Ubuntu"
-	sudo apt-get install gcc -y
-	sudo apt-get install python-dev -y
-	sudo apt-get install libyaml-dev -y
-	sudo apt-get install python-yaml -y
-	sudo apt-get install git -y
-	sudo apt-get install python-pip -y
-	sudo apt-get install xvfb -y
-	sudo apt-get install firefox -y
+	sudo apt-get install -y gcc python-dev libyaml-dev python-yaml git python-pip xvfb firefox
 fi
-if uname -a | grep "Centos" ; then
+if [ -f /etc/redhat-release ] ; then
 	echo "Centos"
-	sudo yum install gcc -y
-	sudo yum install python-dev -y
-	sudo yum install libyaml-dev -y
-	sudo yum install python-yaml -y
-	sudo yum install git -y
-	sudo yum install python-pip -y
-	sudo yum install xvfb -y
-	sudo yum install firefox -y
+	sudo yum install -y gcc python-dev libyaml-dev python-yaml git python-pip xvfb firefox yum info xorg-x11-server-Xvfb
 fi
 
 echo "Build Virtual Environment"
