@@ -21,17 +21,20 @@ class testPreviewAlfresco(unittest.TestCase):
             raise Exception("Cant get to login page")
 
     def test_alfresco_login(self):
+        print "Login"
         main_page = page.MainPage(self.driver)
         main_page.click_login_button()
         assert main_page.is_title_matches("Dashboard"),"FAIL: didnt make it to dashboard on login ! Check Credentials"
 	
     def test_alfresco_goto_searchsolr(self):
+        print "Search solr"
         main_page = page.MainPage(self.driver)
         main_page.click_login_button()
         outcome = main_page.click_searchbudgetform()
-        if "This document can't be previewed." in outcome:
+        badoutcome = "This document can't be previewed."
+        if badoutcome in outcome:
             raise Exception("No Preview Possible")
-	
+ 	
     def tearDown(self):
         self.driver.close()
 

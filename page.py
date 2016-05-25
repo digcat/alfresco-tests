@@ -29,7 +29,7 @@ class MainPage(BasePage):
        element = self.driver.find_element_by_name('password')
        element.send_keys(vars.password)
        element.submit()
-    
+
     def click_searchform(self):
        vars = testconfig.getVars(self)	
        self.driver.maximize_window()
@@ -57,7 +57,7 @@ class MainPage(BasePage):
           try:
              message = self.driver.find_element_by_xpath("//div[contains(@class, 'message')]")
              previewmessage = message.get_attribute('innerHTML')
-             time.sleep(5)
+             time.sleep(10)
           except:
              previewmessage = "Preview Good"
           return previewmessage.strip()
