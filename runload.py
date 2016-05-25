@@ -6,7 +6,7 @@ inputs = []
 
 count=10
 sitecount=10
-app="./makecontent.py"
+app="python ./makecontent.py"
 url="https://localhost/alfresco/cmisatom"
 update="Y"
 
