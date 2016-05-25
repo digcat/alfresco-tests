@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+#set -x
 args=("$@")
 PYTH=${args[0]}
 HOST=${args[1]}

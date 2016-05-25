@@ -1,10 +1,10 @@
 user: admin
-passwd: admin 
-sharehost: 104.238.174.54 
-shareport: 8080
-repohost: 104.238.174.54
-repoport: 8081
-https: false
+passwd: admin
+sharehost: localhost 
+shareport: 443 
+repohost: localhost 
+repoport: 443 
+https: true
 loginurl: /share
 browser: firefox
 photopath: images

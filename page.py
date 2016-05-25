@@ -60,6 +60,7 @@ class MainPage(BasePage):
              time.sleep(10)
           except:
              previewmessage = "Preview Good"
+          print previewmessage
           return previewmessage.strip()
 
     def click_create_site_mainmenu(self):
