@@ -6,8 +6,8 @@ inputs = []
 
 count=10
 sitecount=10
-app="/home/darenf/makecontent.py"
-url="https://honeycombtest.digcat.com/alfresco/cmisatom"
+app="./makecontent.py"
+url="https://localhost/alfresco/cmisatom"
 update="Y"
 
 for i in range(0,sitecount):
