@@ -25,7 +25,7 @@ body = "What is Lorem Ipsum?<br> Lorem Ipsum is simply dummy text of the printin
 
 ftab = "<table width=500 height=30 border=2>"
 ftab = ftab + "<tr>"
-ftab = ftab + "<td>Alfresco Hackathon</td><td>marsbard and digcat</td><td>DataVisProject</td><td>1</td>"
+ftab = ftab + "<td>HoneyComb Alfresco</td><td>https://www.orderofthebee.org<br>marsbard and www.digcat.com</td><td>HoneyComb Open Source</td><td>1</td>"
 ftab = ftab + "</tr>"
 ftab = ftab + "<tr>"
 ftab = ftab + "<td colspan=4>" + body + "</td>"
@@ -58,6 +58,7 @@ props = rootfolder.getProperties()
 #  	print '%s:%s' % (k,v)
 
 listofdocs = []
+foundDocCnt = 0
 
 for x in range(0,iterations):
  	docname = "Datavis-" + str(time.clock()) + ".html"
@@ -68,7 +69,8 @@ for x in range(0,iterations):
 		#for k,v in props.items():
 		#	print '%s:%s' % (k,v)
 	except:
-		print "Document Exists"
+                foundDocCnt = foundDocCnt + 1
+print rootfoldername + "=" + str(foundDocCnt)
 
 if doupdate == "Y":
 	for doc in listofdocs:
