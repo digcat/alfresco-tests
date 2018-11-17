@@ -34,6 +34,7 @@ venv/bin/pip install configure --upgrade
 venv/bin/easy_install PyYAML
 venv/bin/easy_install cmislib
 venv/bin/easy_install simplejson
+venv/bin/easy_install ../master.zip
 cd $ROOT
-#./runtests.sh ./testing_virt/venv/bin
+./runtests.sh ./testing_virt/venv/bin
 
