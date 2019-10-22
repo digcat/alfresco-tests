@@ -1,5 +1,5 @@
 PAM==0.4.2
-Pillow==5.3.0
+Pillow==6.2.0
 PyYAML==3.13
 Twisted-Core==13.2.0
 Twisted-Web==13.2.0
