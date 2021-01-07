@@ -20,7 +20,7 @@ html5lib==1.0.1
 httplib2==0.12.0
 iso8601==0.1.12
 lockfile==0.12.2
-lxml==4.2.5
+lxml==4.6.2
 matplotlib==2.2.3
 numba==0.40.1
 numpy==1.15.4
