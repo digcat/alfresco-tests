@@ -23,7 +23,7 @@ lockfile==0.12.2
 lxml==4.2.5
 matplotlib==2.2.3
 numba==0.40.1
-numpy==1.15.4
+numpy==1.22.0
 oauthlib==2.1.0
 oneconf==0.3.7
 pexpect==4.6.0
