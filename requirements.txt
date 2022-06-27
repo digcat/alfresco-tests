@@ -41,7 +41,7 @@ python-dateutil==2.7.5
 python-debian==0.1.21-nmu2ubuntu2
 pytz==2012c
 pyxdg==0.26
-reportlab==3.5.10
+reportlab==3.5.55
 requests==2.20.1
 scipy==1.1.0
 selenium==3.141.0
