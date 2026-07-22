@@ -55,13 +55,14 @@ repo = client.defaultRepository
 
 try:
 	rootsite = repo.getObjectByPath(rootofwn)
-except:	
+except Exception:
+	# Folder doesn't exist, try base path
 	rootsite = repo.getObjectByPath(basepath)
 	basefolder = rootsite.createFolder(rootfoldername)
 	try:
 		rootsite = repo.getObjectByPath(rootofwn)
-	except:
-		print("Error: Unable to create folder")
+	except Exception as e:
+		print(f"Error: Unable to create folder: {e}")
 
 rootfolder = repo.getObjectByPath(rootofwn)
 props = rootfolder.getProperties()
@@ -80,8 +81,9 @@ for x in range(0,iterations):
 		listofdocs.append(docname)
 		#for k,v in props.items():
 		#	print '%s:%s' % (k,v)
-	except:
-                foundDocCnt = foundDocCnt + 1
+	except Exception as e:
+		# Document already exists or other error
+		foundDocCnt = foundDocCnt + 1
 print(rootfoldername + "=" + str(foundDocCnt))
 
 if doupdate == "Y":
@@ -110,10 +112,10 @@ rootfolder = repo.getObjectByPath(rootofwn)
 if doupdate != "Y":
 	try:
 		rootfolder.deleteTree()
-	except:
-		print("Cant Delete might be timing, lets wait for 30s and try again")
+	except Exception as e:
+		print(f"Cannot delete (timing issue), waiting 30s and retrying: {e}")
 		time.sleep(15)
 		try:
 			rootfolder.deleteTree()
-		except:
-			print("Still cant delete after 30s wait")
+		except Exception as e:
+			print(f"Still cannot delete after 30s wait: {e}")

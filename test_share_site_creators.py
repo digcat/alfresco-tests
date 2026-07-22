@@ -27,7 +27,9 @@ class testShareSiteCreatorsMyAlfresco(unittest.TestCase):
 		main_page.click_create_site_mainmenu()
 		main_page.photo_page()
 		sitetest = 'Site Created'
-	except:
+	except Exception as e:
+		# Expected: Site creation should fail for SITE_CREATORS group test
+		print(f"Site creation prevented (expected): {e}")
 		sitetest = 'No Site'
         
 	assert ("No Site" in sitetest ),"FAIL: Site has been created! with scg enabled"

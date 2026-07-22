@@ -35,8 +35,8 @@ class MainPage(BasePage):
        self.driver.maximize_window()
        try:
           element = self.driver.get(vars.url + '/share/page/site/swsdp/advsearch')
-       except:
-          print ("Cant locate advanced search")
+       except Exception as e:
+          print(f"Cannot locate advanced search: {e}")
 
        element = self.driver.find_element(*MainPageLocators.SEARCH_FORM)
        element.send_keys('meetings')
@@ -58,7 +58,8 @@ class MainPage(BasePage):
              message = self.driver.find_element(By.XPATH, "//div[contains(@class, 'message')]")
              previewmessage = message.get_attribute('innerHTML')
              time.sleep(10)
-          except:
+          except Exception:
+             # If no error message element found, preview is working
              previewmessage = "Preview Good"
           print (previewmessage)
           return previewmessage.strip()
@@ -205,7 +206,8 @@ class MainPage(BasePage):
         try:
                 element = self.driver.find_element(*MainPageLocators.AC_GROUP_SSCMEMBERS)
                 element.click()
-        except:
+        except Exception as e:
+                print(f"Group not found: {e}")
                 return "No Group"
         return "Group found"
 

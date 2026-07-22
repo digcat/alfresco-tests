@@ -97,13 +97,6 @@ class testMyAlfresco(unittest.TestCase):
           a = a + 1
         main_page.photo_page()
         assert main_page.is_title_matches("Site Dashboard"), "FAIL: to reach new site page"
- 
-#    def test_alfresco_delete_site(self):
-#       main_page = page.MainPage(self.driver)
-#	main_page.click_login_button()
-#	main_page.click_delete_site()
-#	main_page.photo_page()
-#	assert main_page,is_title_matches("Sites Manager","FAIL: to delete site")
 
     def tearDown(self):
         self.driver.close()

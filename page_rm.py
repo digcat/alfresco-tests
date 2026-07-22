@@ -34,8 +34,9 @@ class RMPage(RMBasePage):
         sitename = today + ' Site'
         try:
         	element = self.driver.find_element(*MainPageLocators.MAINMENU_SITES)
-        except:
-					return
+        except Exception as e:
+        	print(f"Sites menu not found: {e}")
+        	return
         element.click()
         element = self.driver.find_element(*MainPageLocators.RMCREATESITE_BUTTON)
         element.click()
