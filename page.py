@@ -250,34 +250,28 @@ class MainPage(BasePage):
         element = self.driver.get(vars.url + '/share/page/site/swsdp/site-members')
 
     def photo_page(self):
+        """
+        Capture screenshot with auto-generated unique filename.
+
+        Screenshots are saved to the configured photo path with the caller's
+        function name as the base filename. If a file already exists,
+        appends a number (1-5) to create a unique name.
+        """
         vars = testconfig.getVars(self)
-        if (len(vars.photopath)==0):
-                return
+        if not vars.photopath or len(vars.photopath) == 0:
+            return
 
-        try:
-                os.makedirs(vars.photopath)
-        except OSError:
-                if os.path.exists(vars.photopath):
-                        pass
-                else:
-                        raise	
+        # Ensure directory exists
+        os.makedirs(vars.photopath, exist_ok=True)
 
-        if ( os.path.exists(vars.photopath)):
-                pathready = True		
-        else:
-                mkdir(vars.photopath)
-                pathready = True
-        funccallername = inspect.currentframe().f_back.f_code.co_name 	
-        pathname = vars.photopath + '/' + funccallername + '.png'
-        if ( os.path.exists(pathname)):
-                pathname = vars.photopath + '/' + funccallername + '1.png'		  
-                if ( os.path.exists(pathname)):
-                        pathname = vars.photopath + '/' + funccallername + '2.png'	
-                        if ( os.path.exists(pathname)):
-                                pathname = vars.photopath + '/' + funccallername + '3.png'	
-                                if ( os.path.exists(pathname)):
-                                        pathname = vars.photopath + '/' + funccallername + '4.png'	
-                                        if ( os.path.exists(pathname)):
-                                                pathname = vars.photopath + '/' + funccallername + '5.png'	
+        # Generate unique filename based on caller's function name
+        caller_name = inspect.currentframe().f_back.f_code.co_name
+
+        # Try up to 6 variations (base name + numbers 1-5)
+        for i in range(6):
+            suffix = '' if i == 0 else str(i)
+            pathname = os.path.join(vars.photopath, f"{caller_name}{suffix}.png")
+            if not os.path.exists(pathname):
+                break
 
         self.driver.save_screenshot(pathname)   
