@@ -6,8 +6,9 @@ variable overrides for sensitive credentials.
 """
 
 import os
-from selenium import webdriver
+
 from configure import Configuration
+from selenium import webdriver
 
 
 class TestConfig:
@@ -17,24 +18,25 @@ class TestConfig:
     Loads configuration from config.yml and environment variables.
     Environment variables take precedence over config file values.
     """
+
     _instance = None
 
     def __init__(self):
         """Initialize config from config.yml and environment variables."""
-        config = Configuration.from_file('./config.yml').configure()
+        config = Configuration.from_file("./config.yml").configure()
 
         # Browser configuration
-        self.testbrowser = config['browser']
+        self.testbrowser = config["browser"]
 
         # Server configuration
-        self.sharehost = config['sharehost']
-        self.shareport = config['shareport']
-        self.repohost = config['repohost']
-        self.repoport = config['repoport']
-        self.host = config['sharehost']
+        self.sharehost = config["sharehost"]
+        self.shareport = config["shareport"]
+        self.repohost = config["repohost"]
+        self.repoport = config["repoport"]
+        self.host = config["sharehost"]
 
         # Protocol configuration
-        uri = 'https' if config.get('https', True) else 'http'
+        uri = "https" if config.get("https", True) else "http"
 
         # Build URLs
         if self.shareport:
@@ -49,8 +51,8 @@ class TestConfig:
 
         # SECURITY: Load credentials from environment variables first
         # Falls back to config.yml if not set (for backwards compatibility)
-        self.username = os.getenv('ALFRESCO_USER', config.get('user', ''))
-        self.password = os.getenv('ALFRESCO_PASSWORD', config.get('passwd', ''))
+        self.username = os.getenv("ALFRESCO_USER", config.get("user", ""))
+        self.password = os.getenv("ALFRESCO_PASSWORD", config.get("passwd", ""))
 
         if not self.username or not self.password:
             raise ValueError(
@@ -59,14 +61,14 @@ class TestConfig:
             )
 
         # Additional configuration
-        self.loginurl = self.url + config['loginurl']
-        self.photopath = config.get('photopath', 'images')
-        self.cmisurl = config['cmisurl']
-        self.cmisatom = self.repourl + config['cmisatom']
-        self.ftpurl = config['sharehost']
-        self.ftpport = config.get('ftpport', 21)
-        self.imap_host = config.get('imap_host', 'localhost')
-        self.imap_port = config.get('imap_port', 143)
+        self.loginurl = self.url + config["loginurl"]
+        self.photopath = config.get("photopath", "images")
+        self.cmisurl = config["cmisurl"]
+        self.cmisatom = self.repourl + config["cmisatom"]
+        self.ftpurl = config["sharehost"]
+        self.ftpport = config.get("ftpport", 21)
+        self.imap_host = config.get("imap_host", "localhost")
+        self.imap_port = config.get("imap_port", 143)
 
     @classmethod
     def get_instance(cls):
@@ -132,9 +134,9 @@ def setBrowser(config_or_self):
     else:
         browser = config_or_self.testbrowser
 
-    if browser == 'firefox':
+    if browser == "firefox":
         return webdriver.Firefox()
-    elif browser == 'chrome':
+    elif browser == "chrome":
         return webdriver.Chrome()
     else:
         raise ValueError(f"Unsupported browser: {browser}")

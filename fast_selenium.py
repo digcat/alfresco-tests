@@ -4,30 +4,31 @@ import base64
 import http.client as httplib
 import logging
 import socket
-import string
+
 from selenium.webdriver.remote import utils
-import urllib.request as url_request
-from selenium.webdriver.remote.command import Command
 from selenium.webdriver.remote.errorhandler import ErrorCode
 from selenium.webdriver.remote.webdriver import RemoteConnection
 
 try:
-  from urllib.request import parse
+    from urllib.request import parse
 except ImportError:
-  from urllib.parse import urlparse 
+    pass
 
 LOGGER = logging.getLogger(__name__)
+
+
 class BsRemoteConnection(RemoteConnection):
     """
     A connection with the Remote WebDriver server.
-    
+
     Communicates with the server using the WebDriver wire protocol:
     http://code.google.com/p/selenium/wiki/JsonWireProtocol
     """
+
     # akshay:ryan@127.0.0.1:4444
     def __init__(self, remote_server_addr):
         # Attempt to resolve the hostname and get an IP address.
-        super(BsRemoteConnection, self).__init__(remote_server_addr)
+        super().__init__(remote_server_addr)
         parsed_url = parse.urlparse(remote_server_addr)
         addr = ""
         if parsed_url.hostname:
@@ -35,18 +36,17 @@ class BsRemoteConnection(RemoteConnection):
                 netloc = socket.gethostbyname(parsed_url.hostname)
                 addr = netloc
                 if parsed_url.port:
-                    netloc += ':%d' % parsed_url.port
+                    netloc += ":%d" % parsed_url.port
                 if parsed_url.username:
                     auth = parsed_url.username
                     if parsed_url.password:
-                        auth += ':%s' % parsed_url.password
-                    netloc = '%s@%s' % (auth, netloc)
+                        auth += f":{parsed_url.password}"
+                    netloc = f"{auth}@{netloc}"
             except socket.gaierror:
-                LOGGER.info('Could not get IP address for host: %s' %
-                            parsed_url.hostname)
+                LOGGER.info(f"Could not get IP address for host: {parsed_url.hostname}")
 
         # SECURITY FIX: Support HTTPS connections
-        if parsed_url.scheme == 'https':
+        if parsed_url.scheme == "https":
             self._conn = httplib.HTTPSConnection(str(addr), str(parsed_url.port or 443))
         else:
             self._conn = httplib.HTTPConnection(str(addr), str(parsed_url.port or 80))
@@ -63,39 +63,43 @@ class BsRemoteConnection(RemoteConnection):
         :Returns:
           A dictionary with the server's parsed JSON response.
         """
-        LOGGER.debug('%s %s %s' % (method, url, data))
-        
+        LOGGER.debug(f"{method} {url} {data}")
+
         parsed_url = parse.urlparse(url)
         auth_params, addr_port = parsed_url.netloc.split("@")
         headers = {}
         headers["Connection"] = "Keep-Alive"
         headers[method] = parsed_url.path
         headers["User-Agent"] = "Python http auth"
-        headers["Content-type"] = "text/html;charset=\"UTF-8\""
+        headers["Content-type"] = 'text/html;charset="UTF-8"'
         headers["Connection"] = "keep-alive"
 
         # for basic auth
         if parsed_url.username:
             # SECURITY FIX: Proper base64 encoding for Python 3
-            auth_string = f'{parsed_url.username}:{parsed_url.password}'
-            auth = base64.standard_b64encode(auth_string.encode('utf-8')).decode('ascii').replace('\n', '')
+            auth_string = f"{parsed_url.username}:{parsed_url.password}"
+            auth = (
+                base64.standard_b64encode(auth_string.encode("utf-8"))
+                .decode("ascii")
+                .replace("\n", "")
+            )
             # Authorization header
-            headers["Authorization"] = "Basic %s" % auth
+            headers["Authorization"] = f"Basic {auth}"
 
         self._conn.request(method, parsed_url.path, data, headers)
         resp = self._conn.getresponse()
         statuscode = resp.status
         statusmessage = resp.msg
-        LOGGER.debug('%s %s' %(statuscode, statusmessage))
+        LOGGER.debug(f"{statuscode} {statusmessage}")
         data = resp.read()
         try:
             if statuscode > 399 and statuscode < 500:
-                return {'status': statuscode, 'value': data}
-            body = data.decode('utf-8').replace('\x00', '').strip()
+                return {"status": statuscode, "value": data}
+            body = data.decode("utf-8").replace("\x00", "").strip()
             content_type = []
-            if resp.getheader('Content-Type') is not None:
-                content_type = resp.getheader('Content-Type').split(';')
-            if not any([x.startswith('image/png') for x in content_type]):
+            if resp.getheader("Content-Type") is not None:
+                content_type = resp.getheader("Content-Type").split(";")
+            if not any(x.startswith("image/png") for x in content_type):
                 try:
                     data = utils.load_json(body.strip())
                 except ValueError:
@@ -103,22 +107,22 @@ class BsRemoteConnection(RemoteConnection):
                         status = ErrorCode.SUCCESS
                     else:
                         status = ErrorCode.UNKNOWN_ERROR
-                    return {'status': status, 'value': body.strip()}
+                    return {"status": status, "value": body.strip()}
 
-                assert type(data) is dict, (
-                    'Invalid server response body: %s' % body)
-                assert 'status' in data, (
-                    'Invalid server response; no status: %s' % body)
+                assert type(data) is dict, f"Invalid server response body: {body}"
+                assert "status" in data, f"Invalid server response; no status: {body}"
                 # Some of the drivers incorrectly return a response
                 # with no 'value' field when they should return null.
-                if 'value' not in data:
-                    data['value'] = None
+                if "value" not in data:
+                    data["value"] = None
                 return data
             else:
-                data = {'status': 0, 'value': body.strip()}
+                data = {"status": 0, "value": body.strip()}
                 return data
         finally:
             LOGGER.debug("Finished Request")
 
+
 from selenium.webdriver.remote import webdriver
+
 webdriver.RemoteConnection = BsRemoteConnection

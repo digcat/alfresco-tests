@@ -1,165 +1,176 @@
-from element import BasePageElement
-from locators import MainPageLocators
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
-import inspect
 import datetime
-import testconfig
+import inspect
 import os
 import time
 
-class BasePage(object):
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+
+import testconfig
+from locators import MainPageLocators
+
+
+class BasePage:
 
     def __init__(self, driver):
         self.driver = driver
 
+
 class MainPage(BasePage):
 
-    def is_title_matches(self,string):
+    def is_title_matches(self, string):
         return string in self.driver.title
-    
+
     def click_login_button(self):
-       vars = testconfig.getVars(self)	
-       element = self.driver.find_element(By.NAME, 'username')
-       element.send_keys(vars.username)
-       element = self.driver.find_element(By.NAME, 'password')
-       element.send_keys(vars.password)
-       element.submit()
+        vars = testconfig.getVars(self)
+        element = self.driver.find_element(By.NAME, "username")
+        element.send_keys(vars.username)
+        element = self.driver.find_element(By.NAME, "password")
+        element.send_keys(vars.password)
+        element.submit()
 
     def click_searchform(self):
-       vars = testconfig.getVars(self)	
-       self.driver.maximize_window()
-       try:
-          element = self.driver.get(vars.url + '/share/page/site/swsdp/advsearch')
-       except Exception as e:
-          print(f"Cannot locate advanced search: {e}")
+        vars = testconfig.getVars(self)
+        self.driver.maximize_window()
+        try:
+            element = self.driver.get(vars.url + "/share/page/site/swsdp/advsearch")
+        except Exception as e:
+            print(f"Cannot locate advanced search: {e}")
 
-       element = self.driver.find_element(*MainPageLocators.SEARCH_FORM)
-       element.send_keys('meetings')
-       element = self.driver.find_element(*MainPageLocators.SEARCH_BUTTON)
-       element.click()
-   
+        element = self.driver.find_element(*MainPageLocators.SEARCH_FORM)
+        element.send_keys("meetings")
+        element = self.driver.find_element(*MainPageLocators.SEARCH_BUTTON)
+        element.click()
+
     def click_searchbudgetform(self):
-       vars = testconfig.getVars(self)	
-       self.driver.maximize_window()
-       element = self.driver.get(vars.url + '/share/page/site/swsdp/advsearch')
-       element = self.driver.find_element(*MainPageLocators.SEARCH_FORM)
-       element.send_keys('budget.xls')
-       element = self.driver.find_element(*MainPageLocators.SEARCH_BUTTON)
-       element.click()
-       element = self.driver.find_elements(By.LINK_TEXT, 'budget.xls')
-       for item in element:
-          item.click()
-          try:
-             message = self.driver.find_element(By.XPATH, "//div[contains(@class, 'message')]")
-             previewmessage = message.get_attribute('innerHTML')
-             time.sleep(10)
-          except Exception:
-             # If no error message element found, preview is working
-             previewmessage = "Preview Good"
-          print (previewmessage)
-          return previewmessage.strip()
+        vars = testconfig.getVars(self)
+        self.driver.maximize_window()
+        element = self.driver.get(vars.url + "/share/page/site/swsdp/advsearch")
+        element = self.driver.find_element(*MainPageLocators.SEARCH_FORM)
+        element.send_keys("budget.xls")
+        element = self.driver.find_element(*MainPageLocators.SEARCH_BUTTON)
+        element.click()
+        element = self.driver.find_elements(By.LINK_TEXT, "budget.xls")
+        for item in element:
+            item.click()
+            try:
+                message = self.driver.find_element(By.XPATH, "//div[contains(@class, 'message')]")
+                previewmessage = message.get_attribute("innerHTML")
+                time.sleep(10)
+            except Exception:
+                # If no error message element found, preview is working
+                previewmessage = "Preview Good"
+            print(previewmessage)
+            return previewmessage.strip()
 
     def click_create_site_mainmenu(self):
-        vars = testconfig.getVars(self)
+        testconfig.getVars(self)
         element = self.driver.find_element(*MainPageLocators.MAINMENU_SITES)
         element.click()
 
-
-    def click_create_siteforpreviews(self,sitename):
+    def click_create_siteforpreviews(self, sitename):
         vars = testconfig.getVars(self)
         now = datetime.datetime.now()
-        today = now.strftime("%H%M%S%y%m%d")
+        now.strftime("%H%M%S%y%m%d")
         element = self.driver.find_element(*MainPageLocators.MAINMENU_SITES)
         element.click()
         element = self.driver.find_element(*MainPageLocators.RMCREATESITE_BUTTON)
         element.click()
-        WebDriverWait(self.driver, 10).until(lambda s: s.find_element(*MainPageLocators.RMCREATESITE_NAME).is_displayed())
-        WebDriverWait(self.driver, 10).until(lambda s: s.find_element(*MainPageLocators.RMCREATESITE_SUBMIT).is_displayed())
+        WebDriverWait(self.driver, 10).until(
+            lambda s: s.find_element(*MainPageLocators.RMCREATESITE_NAME).is_displayed()
+        )
+        WebDriverWait(self.driver, 10).until(
+            lambda s: s.find_element(*MainPageLocators.RMCREATESITE_SUBMIT).is_displayed()
+        )
         element = self.driver.find_element(*MainPageLocators.RMCREATESITE_NAME)
         element.click()
         element.send_keys(sitename)
-        element = self.driver.find_element(By.NAME, 'description')
-        element.send_keys('site to test previews')
+        element = self.driver.find_element(By.NAME, "description")
+        element.send_keys("site to test previews")
         element.click()
-        #element = self.driver.find_element(By.NAME, 'shortName')
-        #element.send_keys(sitename)
-        element = self.driver.find_element(By.NAME, 'sitePreset')
+        # element = self.driver.find_element(By.NAME, 'shortName')
+        # element.send_keys(sitename)
+        element = self.driver.find_element(By.NAME, "sitePreset")
         element.send_keys("C")
         element.click()
         element = self.driver.find_element(*MainPageLocators.RMCREATESITE_SUBMIT)
         element.click()
-        element = self.driver.get(vars.url + '/share/page/console/admin-console/manage-sites')
+        element = self.driver.get(vars.url + "/share/page/console/admin-console/manage-sites")
 
     def click_create_site_no_rm(self):
         vars = testconfig.getVars(self)
         now = datetime.datetime.now()
         today = now.strftime("%H%M%S%y%m%d")
-        sitename = today + ' Site'
+        sitename = today + " Site"
         element = self.driver.find_element(*MainPageLocators.MAINMENU_SITES)
         element.click()
         element = self.driver.find_element(*MainPageLocators.CREATESITE_BUTTON)
         element.click()
-        WebDriverWait(self.driver, 10).until(lambda s: s.find_element(*MainPageLocators.CREATESITE_NAME).is_displayed())
-        WebDriverWait(self.driver, 10).until(lambda s: s.find_element(*MainPageLocators.CREATESITE_SUBMIT).is_displayed())
+        WebDriverWait(self.driver, 10).until(
+            lambda s: s.find_element(*MainPageLocators.CREATESITE_NAME).is_displayed()
+        )
+        WebDriverWait(self.driver, 10).until(
+            lambda s: s.find_element(*MainPageLocators.CREATESITE_SUBMIT).is_displayed()
+        )
         element = self.driver.find_element(*MainPageLocators.CREATESITE_NAME)
         element.click()
         element.send_keys(sitename)
-        element = self.driver.find_element(By.NAME, 'description')
-        element.send_keys(today + ' free text description')
+        element = self.driver.find_element(By.NAME, "description")
+        element.send_keys(today + " free text description")
         element.click()
-        element = self.driver.find_element(By.NAME, 'shortName')
+        element = self.driver.find_element(By.NAME, "shortName")
         element.send_keys(today)
-        element = self.driver.find_element(By.NAME, 'sitePreset')
+        element = self.driver.find_element(By.NAME, "sitePreset")
         element.send_keys("C")
         element.click()
         element = self.driver.find_element(*MainPageLocators.CREATESITE_SUBMIT)
         element.click()
-        element = self.driver.get(vars.url + '/share/page/console/admin-console/manage-sites')	
+        element = self.driver.get(vars.url + "/share/page/console/admin-console/manage-sites")
 
- 
     def click_create_site(self):
         vars = testconfig.getVars(self)
         now = datetime.datetime.now()
         today = now.strftime("%H%M%S%y%m%d")
-        sitename = today + ' Site'
+        sitename = today + " Site"
         element = self.driver.find_element(*MainPageLocators.MAINMENU_SITES)
         element.click()
         element = self.driver.find_element(*MainPageLocators.RMCREATESITE_BUTTON)
         element.click()
-        WebDriverWait(self.driver, 10).until(lambda s: s.find_element(*MainPageLocators.RMCREATESITE_NAME).is_displayed())
-        WebDriverWait(self.driver, 10).until(lambda s: s.find_element(*MainPageLocators.RMCREATESITE_SUBMIT).is_displayed())
+        WebDriverWait(self.driver, 10).until(
+            lambda s: s.find_element(*MainPageLocators.RMCREATESITE_NAME).is_displayed()
+        )
+        WebDriverWait(self.driver, 10).until(
+            lambda s: s.find_element(*MainPageLocators.RMCREATESITE_SUBMIT).is_displayed()
+        )
         element = self.driver.find_element(*MainPageLocators.RMCREATESITE_NAME)
         element.click()
         element.send_keys(sitename)
-        element = self.driver.find_element(By.NAME, 'description')
-        element.send_keys(today + ' free text description')
+        element = self.driver.find_element(By.NAME, "description")
+        element.send_keys(today + " free text description")
         element.click()
-        element = self.driver.find_element(By.NAME, 'shortName')
+        element = self.driver.find_element(By.NAME, "shortName")
         element.send_keys(today)
-        element = self.driver.find_element(By.NAME, 'sitePreset')
+        element = self.driver.find_element(By.NAME, "sitePreset")
         element.send_keys("C")
         element.click()
         element = self.driver.find_element(*MainPageLocators.RMCREATESITE_SUBMIT)
         element.click()
-        element = self.driver.get(vars.url + '/share/page/console/admin-console/manage-sites')	
+        element = self.driver.get(vars.url + "/share/page/console/admin-console/manage-sites")
 
     def click_delete_site(self):
         vars = testconfig.getVars(self)
-        #element = self.driver.get(vars.url + '/share/page/console/admin-console/manage-sites')
-        #elementattvalue = element.get_attribute('containerNode,textDirNode')
+        # element = self.driver.get(vars.url + '/share/page/console/admin-console/manage-sites')
+        # elementattvalue = element.get_attribute('containerNode,textDirNode')
 
-        gotourl = vars.url + '/share/page/console/admin-console/manage-sites'	
+        gotourl = vars.url + "/share/page/console/admin-console/manage-sites"
 
-        page = self.driver.get(gotourl) 
+        self.driver.get(gotourl)
 
-        list_of_lists = [[td.text
-                  for td in tr.find_elements(By.XPATH, 'td')]
-                  for tr in self.driver.find_elements(By.XPATH, '//tr')]
+        list_of_lists = [
+            [td.text for td in tr.find_elements(By.XPATH, "td")]
+            for tr in self.driver.find_elements(By.XPATH, "//tr")
+        ]
 
         rowcount = 0
         sites = []
@@ -167,87 +178,94 @@ class MainPage(BasePage):
         targetfordelete = []
 
         for l in list_of_lists:
-                rowcount = rowcount + 1
-                if len(l)==5:	
-                    if len(l[0])>0:
-                        sites = {'sitename': l[0], \
-                                 'sitedesc': l[1], \
-                                 'item1': l[2], 'item2': l[3],'action': l[4], 'row': rowcount}	
-                        siteslist.append(sites)
-                        target = l[0]
-					
-                    if "Records Management" in target:
-                        targetfordelete.append(rowcount)
-                        if target[0:9].isnumeric() and "Site" in target:
-                            targetfordelete.append(rowcount) 
+            rowcount = rowcount + 1
+            if len(l) == 5:
+                if len(l[0]) > 0:
+                    sites = {
+                        "sitename": l[0],
+                        "sitedesc": l[1],
+                        "item1": l[2],
+                        "item2": l[3],
+                        "action": l[4],
+                        "row": rowcount,
+                    }
+                    siteslist.append(sites)
+                    target = l[0]
 
-        print (siteslist)
-        print (targetfordelete)
-        document = '\u25be'
-        elements = self.driver.find_elements(By.XPATH, "//span[contains(., \"" + document + "\")]")
+                if "Records Management" in target:
+                    targetfordelete.append(rowcount)
+                    if target[0:9].isnumeric() and "Site" in target:
+                        targetfordelete.append(rowcount)
+
+        print(siteslist)
+        print(targetfordelete)
+        document = "\u25be"
+        elements = self.driver.find_elements(By.XPATH, '//span[contains(., "' + document + '")]')
 
         self.mouse = webdriver.ActionChains(self.driver)
 
-        value = 'uniqName'
         actionrow = 0
         for ac in elements:
-                actionrow = actionrow + 1
-                print (actionrow,ac)
-                if str(actionrow) in targetfordelete:
-                        ac.click()
-                        self.driver.mouse.move_to_element(ac.find_element(By.NAME, 'Delete').click.perform())
+            actionrow = actionrow + 1
+            print(actionrow, ac)
+            if str(actionrow) in targetfordelete:
+                ac.click()
+                self.driver.mouse.move_to_element(
+                    ac.find_element(By.NAME, "Delete").click.perform()
+                )
 
     def click_admin_user_groups_browse(self):
-        vars = testconfig.getVars(self)
+        testconfig.getVars(self)
         element = self.driver.find_element(*MainPageLocators.AC_GROUP_INPUT)
-        element.send_keys('SITE_CREATORS')
+        element.send_keys("SITE_CREATORS")
         element = self.driver.find_element(*MainPageLocators.AC_GROUP_BROWSE)
         element.click()
         try:
-                element = self.driver.find_element(*MainPageLocators.AC_GROUP_SSCMEMBERS)
-                element.click()
+            element = self.driver.find_element(*MainPageLocators.AC_GROUP_SSCMEMBERS)
+            element.click()
         except Exception as e:
-                print(f"Group not found: {e}")
-                return "No Group"
+            print(f"Group not found: {e}")
+            return "No Group"
         return "Group found"
 
     def click_admin_user_groups(self):
         vars = testconfig.getVars(self)
-        element = self.driver.get(vars.url + '/share/page/console/admin-console/groups')			
-        WebDriverWait(self.driver, 10).until(lambda s: s.find_element(*MainPageLocators.AC_GROUP_BROWSE).is_displayed())
-
+        self.driver.get(vars.url + "/share/page/console/admin-console/groups")
+        WebDriverWait(self.driver, 10).until(
+            lambda s: s.find_element(*MainPageLocators.AC_GROUP_BROWSE).is_displayed()
+        )
 
     def click_people_finder(self):
-        vars = testconfig.getVars(self)	
-        element = self.driver.get(vars.url + '/share/page/people-finder')
- 
+        vars = testconfig.getVars(self)
+        self.driver.get(vars.url + "/share/page/people-finder")
+
     def click_mytasks(self):
         vars = testconfig.getVars(self)
-        element = self.driver.get(vars.url + '/share/page/my-tasks')
+        self.driver.get(vars.url + "/share/page/my-tasks")
 
     def click_repository(self):
         vars = testconfig.getVars(self)
-        element = self.driver.get(vars.url + '/share/page/repository')
+        self.driver.get(vars.url + "/share/page/repository")
 
     def click_myfiles(self):
         vars = testconfig.getVars(self)
-        element = self.driver.get(vars.url + '/share/page/context/mine/myfiles')
+        self.driver.get(vars.url + "/share/page/context/mine/myfiles")
 
     def click_sharedfiles(self):
         vars = testconfig.getVars(self)
-        element = self.driver.get(vars.url + '/share/page/context/shared/sharedfiles')
-	
+        self.driver.get(vars.url + "/share/page/context/shared/sharedfiles")
+
     def click_swsdp_dashboard(self):
-        vars = testconfig.getVars(self)	
-        element = self.driver.get(vars.url + '/share/page/site/swsdp/dashboard')
+        vars = testconfig.getVars(self)
+        self.driver.get(vars.url + "/share/page/site/swsdp/dashboard")
 
     def click_swsdp_documentlibrary(self):
         vars = testconfig.getVars(self)
-        element = self.driver.get(vars.url + '/share/page/site/swsdp/documentlibrary')
-    
+        self.driver.get(vars.url + "/share/page/site/swsdp/documentlibrary")
+
     def click_swsdp_memberlist(self):
         vars = testconfig.getVars(self)
-        element = self.driver.get(vars.url + '/share/page/site/swsdp/site-members')
+        self.driver.get(vars.url + "/share/page/site/swsdp/site-members")
 
     def photo_page(self):
         """
@@ -269,9 +287,9 @@ class MainPage(BasePage):
 
         # Try up to 6 variations (base name + numbers 1-5)
         for i in range(6):
-            suffix = '' if i == 0 else str(i)
+            suffix = "" if i == 0 else str(i)
             pathname = os.path.join(vars.photopath, f"{caller_name}{suffix}.png")
             if not os.path.exists(pathname):
                 break
 
-        self.driver.save_screenshot(pathname)   
+        self.driver.save_screenshot(pathname)

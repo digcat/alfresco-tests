@@ -1,49 +1,52 @@
 import unittest
-from selenium import webdriver
 
 import page
 import testconfig
-import fast_selenium
 
 """  Test MyAlfresco """
 """  Author: DigCat.com """
 
+
 class testMyAlfresco(unittest.TestCase):
-    """ testMyAlfresco Class """
+    """testMyAlfresco Class"""
 
     def setUp(self):
-        """ Setup browser and connection """
+        """Setup browser and connection"""
         self = testconfig.getVars(self)
         self.driver = testconfig.setBrowser(self)
         self.driver.get(self.loginurl)
         if "Alfresco" not in self.driver.title:
-             raise Exception("Cant get to login page")
+            raise Exception("Cant get to login page")
 
     def test_alfresco_login(self):
         main_page = page.MainPage(self.driver)
         main_page.click_login_button()
-        assert main_page.is_title_matches("Dashboard"), "FAIL: didnt make it to dashboard on login ! Check Credentials"
-	
+        assert main_page.is_title_matches(
+            "Dashboard"
+        ), "FAIL: didnt make it to dashboard on login ! Check Credentials"
+
     def test_alfresco_goto_peoplefinder(self):
         main_page = page.MainPage(self.driver)
         main_page.click_login_button()
         main_page.click_people_finder()
         main_page.photo_page()
         assert main_page.is_title_matches("People"), "FAIL: to reach the People page"
-    
+
     def test_alfresco_goto_mytasks(self):
         main_page = page.MainPage(self.driver)
         main_page.click_login_button()
         main_page.click_mytasks()
         main_page.photo_page()
         assert main_page.is_title_matches("My Tasks"), "FAIL: to reach the My Tasks Page"
-    
+
     def test_alfresco_goto_repository(self):
         main_page = page.MainPage(self.driver)
         main_page.click_login_button()
         main_page.click_repository()
         main_page.photo_page()
-        assert main_page.is_title_matches("Repository Browser"), "FAIL: to reach the Repository Page"
+        assert main_page.is_title_matches(
+            "Repository Browser"
+        ), "FAIL: to reach the Repository Page"
 
     def test_alfresco_goto_myfiles(self):
         main_page = page.MainPage(self.driver)
@@ -51,7 +54,7 @@ class testMyAlfresco(unittest.TestCase):
         main_page.click_myfiles()
         main_page.photo_page()
         assert main_page.is_title_matches("My Files"), "FAIL: to reach the Myfiles Page"
-    
+
     def test_alfresco_goto_sharedfiles(self):
         main_page = page.MainPage(self.driver)
         main_page.click_login_button()
@@ -71,7 +74,9 @@ class testMyAlfresco(unittest.TestCase):
         main_page.click_login_button()
         main_page.click_swsdp_documentlibrary()
         main_page.photo_page()
-        assert main_page.is_title_matches("Project Libary"), "FAIL: to reach SWS project library page"
+        assert main_page.is_title_matches(
+            "Project Libary"
+        ), "FAIL: to reach SWS project library page"
 
     def test_alfresco_goto_sws_memberlist(self):
         main_page = page.MainPage(self.driver)
@@ -86,20 +91,21 @@ class testMyAlfresco(unittest.TestCase):
         main_page.click_searchform()
         main_page.photo_page()
         assert main_page.is_title_matches("Search"), "FAIL: to reach search result page"
-	
+
     def test_alfresco_create_site(self):
         main_page = page.MainPage(self.driver)
         main_page.click_login_button()
-        sites = 1 
-        a=0
+        sites = 1
+        a = 0
         while a < sites:
-          main_page.click_create_site()
-          a = a + 1
+            main_page.click_create_site()
+            a = a + 1
         main_page.photo_page()
         assert main_page.is_title_matches("Site Dashboard"), "FAIL: to reach new site page"
 
     def tearDown(self):
         self.driver.close()
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,12 @@
+# Development dependencies for code quality and linting
+#
+# Install with: pip install -r requirements-dev.txt
+
+# Code formatting
+black>=26.0.0
+
+# Linting (replaces flake8, isort, and many plugins)
+ruff>=0.15.0
+
+# Optional: Type checking
+# mypy>=1.8.0

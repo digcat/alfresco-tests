@@ -1,0 +1,51 @@
+[tool.black]
+line-length = 100
+target-version = ['py310']
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | venv
+  | testing_virt
+  | __pycache__
+  | \.pytest_cache
+  | \.eggs
+  | build
+  | dist
+)/
+'''
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+exclude = [
+    ".git",
+    ".venv",
+    "venv",
+    "testing_virt",
+    "__pycache__",
+    ".pytest_cache",
+    ".eggs",
+    "build",
+    "dist",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort (import sorting)
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+]
+ignore = [
+    "E501",  # line too long (Black handles this)
+    "B904",  # raise ... from err (not critical for this codebase)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]  # Unused imports are OK in __init__.py files
+"fast_selenium.py" = ["E402", "UP031"]  # Module imports at bottom (monkey patching), printf formatting (vendored code)
+"page.py" = ["E741"]  # Ambiguous variable names in legacy code
