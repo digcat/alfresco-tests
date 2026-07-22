@@ -1,15 +1,33 @@
-user: admin
-passwd: admin
-sharehost: localhost 
-shareport: 443 
-repohost: localhost 
-repoport: 443 
-https: true
-loginurl: /share
-browser: firefox
-photopath: images
-cmisurl: /alfresco/api/-default-/public/cmis/versions/1.1/browser
-cmisatom: /alfresco/cmisatom
-ftpport: 2021
-imap_host: localhost
-imap_port: 8143
+# Alfresco Test Configuration Example
+# Copy this file to config.yml and update with your values
+# IMPORTANT: Never commit config.yml to version control!
+
+# Authentication (Use environment variables instead!)
+# Set ALFRESCO_USER and ALFRESCO_PASSWORD environment variables
+user=your_username_here
+passwd=your_password_here
+
+# Alfresco Server Configuration
+sharehost=dev.daren.net
+shareport=443
+repohost=dev.daren.net
+repoport=443
+https=true
+loginurl=/share
+
+# Browser Configuration
+browser=firefox
+
+# Test Configuration
+photopath=images
+
+# CMIS Configuration
+cmisurl=/alfresco/api/-default-/public/cmis/versions/1.1/browser
+cmisatom=/alfresco/cmisatom
+
+# FTP Configuration
+ftpport=2021
+
+# IMAP Configuration
+imap_host=localhost
+imap_port=8143

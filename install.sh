@@ -16,7 +16,7 @@ fi
 
 if [ -f /etc/debian_version ] ; then
 	echo "Ubuntu"
-	sudo apt-get install -y gcc python-dev libyaml-dev python-yaml git python-pip xvfb firefox python-simplejson
+	sudo apt-get install -y gcc python2.7 python2.7-dev libyaml-dev python-yaml git python-pip xvfb firefox python-simplejson
 fi
 if [ -f /etc/redhat-release ] ; then
 	echo "Centos"
@@ -31,10 +31,9 @@ virtualenv venv
 source venv/bin/activate
 venv/bin/pip install selenium --upgrade
 venv/bin/pip install configure --upgrade
-venv/bin/easy_install PyYAML
-venv/bin/easy_install cmislib
-venv/bin/easy_install simplejson
-venv/bin/easy_install ../master.zip
+venv/bin/pip install PyYAML
+venv/bin/pip install cmislib
+venv/bin/pip install simplejson
 cd $ROOT
 ./runtests.sh ./testing_virt/venv/bin
 

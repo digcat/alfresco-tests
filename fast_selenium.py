@@ -1,20 +1,20 @@
 # Copyright 2013 BrowserStack
 
 import base64
-import httplib
+import http.client as httplib
 import logging
 import socket
 import string
 from selenium.webdriver.remote import utils
-import urllib2 as url_request
+import urllib.request as url_request
 from selenium.webdriver.remote.command import Command
 from selenium.webdriver.remote.errorhandler import ErrorCode
 from selenium.webdriver.remote.webdriver import RemoteConnection
 
 try:
-  from urllib2 import parse
+  from urllib.request import parse
 except ImportError:
-  import urlparse as parse
+  from urllib.parse import urlparse 
 
 LOGGER = logging.getLogger(__name__)
 class BsRemoteConnection(RemoteConnection):
@@ -45,7 +45,11 @@ class BsRemoteConnection(RemoteConnection):
                 LOGGER.info('Could not get IP address for host: %s' %
                             parsed_url.hostname)
 
-        self._conn = httplib.HTTPConnection(str(addr),str(parsed_url.port or 80))
+        # SECURITY FIX: Support HTTPS connections
+        if parsed_url.scheme == 'https':
+            self._conn = httplib.HTTPSConnection(str(addr), str(parsed_url.port or 443))
+        else:
+            self._conn = httplib.HTTPConnection(str(addr), str(parsed_url.port or 80))
 
     def _request(self, url, data=None, method=None):
         """
@@ -72,7 +76,9 @@ class BsRemoteConnection(RemoteConnection):
 
         # for basic auth
         if parsed_url.username:
-            auth = base64.standard_b64encode('%s:%s' % (parsed_url.username, parsed_url.password)).replace('\n','')
+            # SECURITY FIX: Proper base64 encoding for Python 3
+            auth_string = f'{parsed_url.username}:{parsed_url.password}'
+            auth = base64.standard_b64encode(auth_string.encode('utf-8')).decode('ascii').replace('\n', '')
             # Authorization header
             headers["Authorization"] = "Basic %s" % auth
 

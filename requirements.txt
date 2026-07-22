@@ -1,57 +1,28 @@
-PAM==0.4.2
-Pillow==6.2.0
-PyYAML==5.1
-Twisted-Core==13.2.0
-Twisted-Web==13.2.0
-adium-theme-ubuntu==0.3.4
-apt-xapian-index==0.45
-argparse==1.4.0
-chardet==3.0.4
-cmislib==0.6.0
-colorama==0.4.0
-command-not-found==0.3
-configure==0.5
-debtagshw==0.1
-decorator==4.3.0
-defer==1.0.6
-dirspec==13.10
-duplicity==0.7.14
-html5lib==1.0.1
-httplib2==0.12.0
-iso8601==0.1.12
-lockfile==0.12.2
-lxml==4.2.5
-matplotlib==2.2.3
-numba==0.40.1
-numpy==1.15.4
-oauthlib==2.1.0
-oneconf==0.3.7
-pexpect==4.6.0
-piston-mini-client==0.7.5
-pyOpenSSL==18.0.0
-pycrypto==2.6.1
-pycups==1.9.74
-pycurl==7.43.0.2
-pygobject==3.30.2
-pyparsing==2.3.0
-pyserial==3.4
-pysmbc==1.0.15.8
-python-apt==0.9.3.5
-python-dateutil==2.7.5
-python-debian==0.1.21-nmu2ubuntu2
-pytz==2012c
-pyxdg==0.26
-reportlab==3.5.10
-requests==2.20.1
-scipy==1.1.0
-selenium==3.141.0
-sessioninstaller==0.0.0
-six==1.11.0
-software-center-aptd-plugins==0.0.0
-system-service==0.1.6
-unity-lens-photos==1.0
-urllib3==1.24.2
-vboxapi==1.0
-wsgiref==0.1.2
-xdiagnose==3.6.3build2
-zope.interface==4.6.0
+# Alfresco Test Suite - Updated Dependencies
+# Updated to secure versions - 2026-07-22
+
+# Core testing framework
+selenium>=4.18.0,<5.0.0
+pytest>=8.0.0,<9.0.0
+pytest-xdist>=3.5.0
+pytest-html>=4.1.0
+
+# Configuration
+PyYAML>=6.0.1,<7.0.0
+configure>=0.5
+python-dotenv>=1.0.0
+
+# CMIS and content management
+cmislib>=0.6.0
+
+# Security and HTTP
+pyOpenSSL>=24.0.0,<25.0.0
+requests>=2.31.0,<3.0.0
+urllib3>=2.2.0,<3.0.0
+
+# Image handling
+Pillow>=10.2.0,<11.0.0
+
+# Utilities
+python-dateutil>=2.8.2,<3.0.0
+lxml>=5.1.0

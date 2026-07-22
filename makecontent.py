@@ -1,16 +1,17 @@
 #!/usr/bin/python
 import sys
+import os
 import simplejson as json
 import time
 from cmislib.model import CmisClient, Repository
 
 if len(sys.argv) != 5:
-	print "Syntax: makecontent.py <hostname> <foldername> <numofiterations> <doupdate>"
-	print "eg: python makecontent.py http://localhost:8080/alfresco/cmisatom site1 100 Y"
+	print("Syntax: makecontent.py <hostname> <foldername> <numofiterations> <doupdate>")
+	print("eg: python makecontent.py http://localhost:8080/alfresco/cmisatom site1 100 Y")
 	sys.exit()
 
 hostname = sys.argv[1]
-rootfoldername = sys.argv[2] 
+rootfoldername = sys.argv[2]
 iterations = int(sys.argv[3])
 doupdate = sys.argv[4]
 
@@ -34,7 +35,18 @@ ftab = ftab + "</table>"
 weprep = weprep + ftab
 
 cmurl = hostname
-client = CmisClient(cmurl,'admin','admin')
+
+# SECURITY FIX: Load credentials from environment variables
+username = os.getenv('ALFRESCO_USER')
+password = os.getenv('ALFRESCO_PASSWORD')
+
+if not username or not password:
+	print("ERROR: ALFRESCO_USER and ALFRESCO_PASSWORD environment variables must be set")
+	print("Example: export ALFRESCO_USER=admin")
+	print("         export ALFRESCO_PASSWORD=your_password")
+	sys.exit(1)
+
+client = CmisClient(cmurl, username, password)
 
 sitename =  'swsdp'
 basepath = '/Sites/' + sitename + '/documentLibrary'
@@ -48,8 +60,8 @@ except:
 	basefolder = rootsite.createFolder(rootfoldername)
 	try:
 		rootsite = repo.getObjectByPath(rootofwn)
-	except:	
-		print "Error: Unable to create folder"
+	except:
+		print("Error: Unable to create folder")
 
 rootfolder = repo.getObjectByPath(rootofwn)
 props = rootfolder.getProperties()
@@ -61,7 +73,7 @@ listofdocs = []
 foundDocCnt = 0
 
 for x in range(0,iterations):
- 	docname = "Datavis-" + str(time.clock()) + ".html"
+ 	docname = "Datavis-" + str(time.time()) + ".html"
 	try:
 		newdoc = repo.createDocumentFromString(docname, parentFolder=rootfolder, contentString=weprep, contentType='text/html')
 		props = newdoc.getProperties()
@@ -70,12 +82,14 @@ for x in range(0,iterations):
 		#	print '%s:%s' % (k,v)
 	except:
                 foundDocCnt = foundDocCnt + 1
-print rootfoldername + "=" + str(foundDocCnt)
+print(rootfoldername + "=" + str(foundDocCnt))
 
 if doupdate == "Y":
 	for doc in listofdocs:
 		name = doc
-		querySimpleSelect = "SELECT * FROM cmis:document where cmis:name like '" + name + "'"
+		# SECURITY FIX: Escape single quotes to prevent SQL injection
+		safe_name = name.replace("'", "''")
+		querySimpleSelect = "SELECT * FROM cmis:document WHERE cmis:name = '" + safe_name + "'"
 		resultSet = repo.query(querySimpleSelect)
 		for result in resultSet:
 			#print result.name 
@@ -97,9 +111,9 @@ if doupdate != "Y":
 	try:
 		rootfolder.deleteTree()
 	except:
-		print "Cant Delete might be timing, lets wait for 30s and try again"
+		print("Cant Delete might be timing, lets wait for 30s and try again")
 		time.sleep(15)
 		try:
 			rootfolder.deleteTree()
 		except:
-			print "Still cant delete after 30s wait"
+			print("Still cant delete after 30s wait")

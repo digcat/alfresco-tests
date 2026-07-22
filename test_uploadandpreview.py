@@ -29,21 +29,24 @@ class testUploadAndPreviewMyAlfresco(unittest.TestCase):
 
     def test_UploadAndPreview_alfresco_ftp(self):
 	sitename = 'Alfresco-Hackathon'
+
+        # SECURITY WARNING: Plain FTP transmits credentials and data in cleartext
+        # Consider using FTP_TLS for encrypted transmission in production environments
         f = ftplib.FTP()
-        f.connect(self.ftpurl,port=self.ftpport)
-        f.login(self.username,self.password)	
+        f.connect(self.ftpurl, port=self.ftpport)
+        f.login(self.username, self.password)	
 	destination = '/Alfresco/Sites/' + sitename + '/documentLibrary/'
 	filestotest = []
 	for root, dirs, files in os.walk('previewtestfiles'):
     		for fname in files:
         		full_fname = os.path.join(root, fname)
 			fulldestination = destination
-			print fulldestination
+			print(fulldestination)
         		f.storbinary('STOR ' + fulldestination + '/' + fname, open(full_fname, 'rb'))
 			filestotest.append('site/' + sitename + '/documentlibrary/' + fname)
 
-	print f.pwd()
-	print filestotest	
+	print(f.pwd())
+	print(filestotest)	
 	
     def tearDown(self):
         self.driver.close()
