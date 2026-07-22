@@ -21,9 +21,9 @@ class RMPage(RMBasePage):
 
     def click_login_button(self):
         vars = testconfig.getVars(self)
-        element = self.driver.find_element_by_name('username')
+        element = self.driver.find_element(By.NAME, 'username')
         element.send_keys(vars.username)
-        element = self.driver.find_element_by_name('password')
+        element = self.driver.find_element(By.NAME, 'password')
         element.send_keys(vars.password)
         element.submit()
 

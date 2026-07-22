@@ -29,7 +29,7 @@ class testJSConsoleMyAlfresco(unittest.TestCase):
         jsconsole_page.click_jsconsole_button()
         main_page = page.MainPage(self.driver)
         main_page.photo_page()
-        assert main_page,is_title_matches("Admin Tools", "FAIL: to reach admin tools page")
+        assert main_page.is_title_matches("Admin Tools"), "FAIL: to reach admin tools page"
 
     def tearDown(self):
         self.driver.close()

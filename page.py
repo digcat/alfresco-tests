@@ -24,9 +24,9 @@ class MainPage(BasePage):
     
     def click_login_button(self):
        vars = testconfig.getVars(self)	
-       element = self.driver.find_element_by_name('username')
+       element = self.driver.find_element(By.NAME, 'username')
        element.send_keys(vars.username)
-       element = self.driver.find_element_by_name('password')
+       element = self.driver.find_element(By.NAME, 'password')
        element.send_keys(vars.password)
        element.submit()
 
@@ -51,11 +51,11 @@ class MainPage(BasePage):
        element.send_keys('budget.xls')
        element = self.driver.find_element(*MainPageLocators.SEARCH_BUTTON)
        element.click()
-       element = self.driver.find_elements_by_link_text('budget.xls')
+       element = self.driver.find_elements(By.LINK_TEXT, 'budget.xls')
        for item in element:
           item.click()
           try:
-             message = self.driver.find_element_by_xpath("//div[contains(@class, 'message')]")
+             message = self.driver.find_element(By.XPATH, "//div[contains(@class, 'message')]")
              previewmessage = message.get_attribute('innerHTML')
              time.sleep(10)
           except:
@@ -82,12 +82,12 @@ class MainPage(BasePage):
         element = self.driver.find_element(*MainPageLocators.RMCREATESITE_NAME)
         element.click()
         element.send_keys(sitename)
-        element = self.driver.find_element_by_name('description')
+        element = self.driver.find_element(By.NAME, 'description')
         element.send_keys('site to test previews')
         element.click()
-        #element = self.driver.find_element_by_name('shortName')
+        #element = self.driver.find_element(By.NAME, 'shortName')
         #element.send_keys(sitename)
-        element = self.driver.find_element_by_name('sitePreset')
+        element = self.driver.find_element(By.NAME, 'sitePreset')
         element.send_keys("C")
         element.click()
         element = self.driver.find_element(*MainPageLocators.RMCREATESITE_SUBMIT)
@@ -108,12 +108,12 @@ class MainPage(BasePage):
         element = self.driver.find_element(*MainPageLocators.CREATESITE_NAME)
         element.click()
         element.send_keys(sitename)
-        element = self.driver.find_element_by_name('description')
+        element = self.driver.find_element(By.NAME, 'description')
         element.send_keys(today + ' free text description')
         element.click()
-        element = self.driver.find_element_by_name('shortName')
+        element = self.driver.find_element(By.NAME, 'shortName')
         element.send_keys(today)
-        element = self.driver.find_element_by_name('sitePreset')
+        element = self.driver.find_element(By.NAME, 'sitePreset')
         element.send_keys("C")
         element.click()
         element = self.driver.find_element(*MainPageLocators.CREATESITE_SUBMIT)
@@ -135,12 +135,12 @@ class MainPage(BasePage):
         element = self.driver.find_element(*MainPageLocators.RMCREATESITE_NAME)
         element.click()
         element.send_keys(sitename)
-        element = self.driver.find_element_by_name('description')
+        element = self.driver.find_element(By.NAME, 'description')
         element.send_keys(today + ' free text description')
         element.click()
-        element = self.driver.find_element_by_name('shortName')
+        element = self.driver.find_element(By.NAME, 'shortName')
         element.send_keys(today)
-        element = self.driver.find_element_by_name('sitePreset')
+        element = self.driver.find_element(By.NAME, 'sitePreset')
         element.send_keys("C")
         element.click()
         element = self.driver.find_element(*MainPageLocators.RMCREATESITE_SUBMIT)
@@ -157,8 +157,8 @@ class MainPage(BasePage):
         page = self.driver.get(gotourl) 
 
         list_of_lists = [[td.text
-                  for td in tr.find_elements_by_xpath('td')]
-                  for tr in self.driver.find_elements_by_xpath('//tr')]
+                  for td in tr.find_elements(By.XPATH, 'td')]
+                  for tr in self.driver.find_elements(By.XPATH, '//tr')]
 
         rowcount = 0
         sites = []
@@ -183,7 +183,7 @@ class MainPage(BasePage):
         print (siteslist)
         print (targetfordelete)
         document = '\u25be'
-        elements = self.driver.find_elements_by_xpath("//span[contains(., \"" + document + "\")]")
+        elements = self.driver.find_elements(By.XPATH, "//span[contains(., \"" + document + "\")]")
 
         self.mouse = webdriver.ActionChains(self.driver)
 
@@ -194,7 +194,7 @@ class MainPage(BasePage):
                 print (actionrow,ac)
                 if str(actionrow) in targetfordelete:
                         ac.click()
-                        self.driver.mouse.move_to_element(ac.find_element_by_name('Delete').click.perform())
+                        self.driver.mouse.move_to_element(ac.find_element(By.NAME, 'Delete').click.perform())
 
     def click_admin_user_groups_browse(self):
         vars = testconfig.getVars(self)
